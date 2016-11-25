@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Castle.Facilities.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:Castle.Facilities.NHibernate.SessionManager">
+            <summary>
+            	The session manager is an object wrapper around the "real" manager which is managed
+            	by a custom per-transaction lifestyle. If you wish to implement your own manager, you can
+            	pass a function to this object at construction time and replace the built-in session manager.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernate.ISessionManager">
+            <summary>
+            	Session manager interface. This denotes the ISession factory. The default
+            	session lifestyle is per-transaction, so call OpenSession within a transaction!
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.ISessionManager.OpenSession">
+            <summary>
+            	Gets a new or existing ISession depending on your context.
+            </summary>
+            <returns>A non-null ISession.</returns>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.SessionManager.#ctor(System.Func{NHibernate.ISession})">
+            <summary>
+            	Constructor.
+            </summary>
+            <param name = "getSession"></param>
+        </member>
+        <member name="T:Castle.Facilities.NHibernate.INHibernateInstaller">
+            <summary>
+            	Register a bunch of these; one for each database.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.INHibernateInstaller.Registered(NHibernate.ISessionFactory)">
+            <summary>
+            	Call-back to the installer, when the factory is registered
+            	and correctly set up in Windsor..
+            </summary>
+            <param name = "factory"></param>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.INHibernateInstaller.IsDefault">
+            <summary>
+            	Is this the default session factory
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.INHibernateInstaller.SessionFactoryKey">
+            <summary>
+            	Gets a session factory key. This key must be unique for the registered
+            	NHibernate installers.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.INHibernateInstaller.Interceptor">
+            <summary>
+            	An interceptor to assign to the ISession being resolved through this session factory.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.INHibernateInstaller.Config">
+            <summary>
+            Returns NHibernate configuration
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernate.NHibernateFacility">
+            <summary>
+            	Easy NHibernate integration with declarative transactions 
+            	using Castle Transaction Services and .Net System.Transactions.
+            	Integrate Transactional NTFS with NHibernate and database transactions, 
+            	or choose methods to fork dependent transactions for to run your transaction 
+            	constituents in parallel. The NHibernate Facility is configured 
+            	using FluentNHibernate
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.NHibernateFacility.SessionPerTxSuffix">
+            <summary>
+            	The suffix on the name of the component that has a lifestyle of Per Transaction.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.NHibernateFacility.SessionPWRSuffix">
+            <summary>
+            	The suffix on the name of the ISession/component that has a lifestyle of Per Web Request.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.NHibernateFacility.SessionTransientSuffix">
+            <summary>
+            	The suffix on the name of the ISession/component that has a transient lifestyle.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.NHibernateFacility.SessionManagerSuffix">
+            <summary>
+            	The suffix of the session manager component.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.NHibernateFacility.SessionStatelessInfix">
+            <summary>
+            	The infix (fackey-[here]-session) of stateless session in the naming of components
+            	in Windsor.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.NHibernateFacility.#ctor">
+            <summary>
+            	Instantiates a new NHibernateFacility with the default options, session per transaction
+            	and automatic flush mode.
+            </summary>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.NHibernateFacility.#ctor(Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption)">
+            <summary>
+            	Instantiates a new NHibernateFacility with a given lifestyle option and automatic flush mode.
+            </summary>
+            <param name = "defaultLifeStyle">The Session flush mode.</param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.NHibernateFacility.#ctor(Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption,NHibernate.FlushMode)">
+            <summary>
+            	Instantiates a new NHibernateFacility with the default options.
+            </summary>
+            <param name = "defaultLifeStyle">The </param>
+            <param name = "flushMode">The session flush mode</param>
+        </member>
+        <member name="M:Castle.Facilities.NHibernate.NHibernateFacility.Init">
+            <summary>
+            	Initialize, override. Registers everything relating to NHibernate in the container, including:
+            	<see cref="T:NHibernate.ISessionFactory"/>, <see cref="T:Castle.Facilities.NHibernate.ISessionManager"/>, <see cref="T:System.Func`1"/>, <see cref="T:NHibernate.Cfg.Configuration"/>,
+            	<see cref="T:NHibernate.ISession"/>, <see cref="T:NHibernate.IStatelessSession"/>.
+            </summary>
+            <remarks>
+            	Requires <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryFacility"/> and <see cref="T:Castle.Facilities.FactorySupport.FactorySupportFacility"/> which will be registered by this
+            	facility if there are none already registered.
+            </remarks>
+            <exception cref="T:Castle.MicroKernel.Facilities.FacilityException">
+            	If any of:
+            	<list type="bullet">
+            		<item>You haven't added <see cref="T:Castle.Facilities.AutoTx.AutoTxFacility"/>.</item>
+            		<item>no <see cref="T:Castle.Facilities.NHibernate.INHibernateInstaller"/> components registered</item>
+            		<item>one or many of the <see cref="T:Castle.Facilities.NHibernate.INHibernateInstaller"/> components had a null or empty session factory key returned</item>
+            		<item>zero or more than one of the <see cref="T:Castle.Facilities.NHibernate.INHibernateInstaller"/> components had <see cref="P:Castle.Facilities.NHibernate.INHibernateInstaller.IsDefault"/> returned as true</item>
+            		<item>duplicate <see cref="P:Castle.Facilities.NHibernate.INHibernateInstaller.SessionFactoryKey"/>s registered</item>
+            	</list>
+            </exception>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.NHibernateFacility.DefaultLifeStyle">
+            <summary>
+            	Gets or sets the default session life style option.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.NHibernateFacility.LifeStyleScoped">
+            <summary>
+            	Gets or sets the session life style scope type.
+            </summary>
+        </member>
+        <member name="P:Castle.Facilities.NHibernate.NHibernateFacility.FlushMode">
+            <summary>
+            	Gets or sets the default nhibernate session flush mode. This
+            	mode does not apply to stateless sessions.
+            </summary>
+        </member>
+        <member name="T:Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption">
+            <summary>
+            	Specifies the default session management strategy.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption.SessionPerTransaction">
+            <summary>
+            	Specifies that sessions should be opened and closed per transaction. This has the semantics
+            	that the session is kept per top transaction, unless the dependent transaction is forked, in
+            	which case, a new session is resolved to avoid sharing the session accross threads.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption.SessionPerWebRequest">
+            <summary>
+            	Specifies that sessions should be opened and closed per web request.
+            </summary>
+        </member>
+        <member name="F:Castle.Facilities.NHibernate.DefaultSessionLifeStyleOption.SessionTransient">
+            <summary>
+            	Specifies that the session should be transiently registered.
+            </summary>
+        </member>
+    </members>
+</doc>
