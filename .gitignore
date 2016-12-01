@@ -251,6 +251,6 @@ paket-files/
 .idea/
 *.sln.iml
 
-FrontEnd/desktop-app
+FrontEnd/desktop-app/*
 FrontEnd/mobile-app/*
 FrontEnd/web-app/node_modules

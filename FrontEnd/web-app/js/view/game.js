@@ -25,20 +25,22 @@ define([
             render    : function () {
                 var _this = this;
                 body.removeClass().addClass('game');
-                gameCollection.fetch({
-                    success: function () {
-                        gameCollection.each(function (model) {
-                            _this.$el.html(_this.template.page({
-                                model: model
-                            }));
-                        });
-                        _this.$el.append(_this.template.section);
-                    }
-                });
-                gameModel.fetch({
-                    success: function (model) {
-                    }
-                });
+                // gameCollection.fetch({
+                //     success: function () {
+                //         gameCollection.each(function (model) {
+                //             _this.$el.html(_this.template.page({
+                //                 model: model
+                //             }));
+                //         });
+                //         _this.$el.append(_this.template.section);
+                //     }
+                // });
+                // gameModel.fetch({
+                //     success: function (model) {
+                //     }
+                // });
+                _this.$el.html(_this.template.page({}));
+                _this.$el.append(_this.template.section);
                 return this;
             },
             select    : function (e) {
