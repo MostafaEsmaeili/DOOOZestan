@@ -1,1 +1,1 @@
-A Tic Tac Toe game for friends to play with each other wherever they are, whatever device they use.
+A Tic Tac Toe game for friends to play with each other wherever they are, whatever device they use. Enjoy !
