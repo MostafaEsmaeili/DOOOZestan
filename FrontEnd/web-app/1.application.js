@@ -2073,12 +2073,24 @@ webpackJsonp([1],[
 	            },
 	            initialize: function () {
 	                this.render();
+	                $(window).on("resize", this.updateCSS);
 	            },
 	            render    : function () {
+	                var _this = this;
 	                body.removeClass().addClass('login');
 	                this.$el.html(this.template.page);
-	                this.$el.append(this.template.section);
+	                this.$el.append(this.template.section).promise().done(function () {
+	                    _this.updateCSS();
+	                });
 	                return this;
+	            },
+	            updateCSS : function () {
+	                if (window.innerHeight < 500) {
+	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
+	                }
+	                else {
+	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
+	                }
 	            }
 	        });
 	    return loginView;
@@ -2116,12 +2128,24 @@ webpackJsonp([1],[
 	            },
 	            initialize: function () {
 	                this.render();
+	                $(window).on("resize", this.updateCSS);
 	            },
 	            render    : function () {
+	                var _this = this;
 	                body.removeClass().addClass('register');
 	                this.$el.html(this.template.page);
-	                this.$el.append(this.template.section);
+	                this.$el.append(this.template.section).promise().done(function () {
+	                    _this.updateCSS();
+	                });
 	                return this;
+	            },
+	            updateCSS : function () {
+	                if (window.innerHeight < 500) {
+	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
+	                }
+	                else {
+	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
+	                }
 	            }
 	        });
 	    return registerView;
@@ -2137,7 +2161,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
+	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
 
 /***/ },
 /* 15 */

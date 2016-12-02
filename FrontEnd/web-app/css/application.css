@@ -5815,14 +5815,19 @@ button.close {
     display: none !important; } }
 
 .loginSection {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  width: 100%;
   text-align: center; }
+  .loginSection.largeHeight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .loginSection.smallHeight {
+    margin: auto;
+    padding-top: 50px; }
   .loginSection .welcome {
     color: white;
     font-size: 15px;
@@ -5839,39 +5844,62 @@ button.close {
     border-bottom-left-radius: 50px;
     border-bottom-left-radius: 50px;
     border-top-left-radius: 50px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 5px white;
+    box-shadow: 0 0 5px white; }
   .loginSection .userName, .loginSection .passWord {
     background-color: #375;
     border: none;
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px; }
-    @media (max-width: 240px) {
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
       .loginSection .userName, .loginSection .passWord {
-        width: 200px; } }
+        width: 90%; } }
+    .loginSection .userName:active, .loginSection .passWord:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
   .loginSection .submit {
     background-color: white;
     border: none;
     margin: 10px 0;
     padding: 10px;
-    width: 300px; }
-    @media (max-width: 240px) {
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
       .loginSection .submit {
-        width: 200px; } }
+        width: 90%; } }
+    .loginSection .submit:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
   .loginSection .register {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
 
 .registerSection {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  width: 100%;
   text-align: center; }
+  .registerSection.largeHeight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .registerSection.smallHeight {
+    margin: auto;
+    padding-top: 50px; }
   .registerSection .welcome {
     color: white;
     font-size: 15px;
@@ -5885,19 +5913,35 @@ button.close {
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px; }
-    @media (max-width: 240px) {
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
       .registerSection .userName, .registerSection .passWord, .registerSection .email {
-        width: 200px; } }
+        width: 90%; } }
+    .registerSection .userName:active, .registerSection .passWord:active, .registerSection .email:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
   .registerSection .submit {
     background-color: white;
     border: none;
     margin: 10px 0;
     padding: 10px;
-    width: 300px; }
-    @media (max-width: 240px) {
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
       .registerSection .submit {
-        width: 200px; } }
+        width: 90%; } }
+    .registerSection .submit:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
   .registerSection .login {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
@@ -5965,4 +6009,5 @@ button.close {
 body {
   background-color: #264;
   width: 100%;
-  height: 100vh; }
+  min-height: 100vh;
+  overflow-y: scroll; }

@@ -1,6 +1,13 @@
 .loginSection {
-  @include center();
+  width      : 100%;
   text-align : center;
+  &.largeHeight {
+    @include center();
+  }
+  &.smallHeight {
+    margin      : auto;
+    padding-top : 50px;
+  }
 
   //********************************************************************************************************************
 
@@ -19,9 +26,11 @@
   .avatar {
     @include border-radius(50px);
     margin-bottom : 10px;
+    @include box-shadow(0 0 5px white);
   }
 
   //********************************************************************************************************************
+
   .userName, .passWord {
     background-color : $color-backgroundColor-glassy;
     border           : none;
@@ -29,8 +38,12 @@
     padding          : 10px;
     color            : white;
     width            : 300px;
-    @media (max-width : $screen-xs-min/2) {
-      width : 200px;
+    @media (max-width : $screen-xs-min) {
+      width : 90%;
+    }
+    @include transition(transform 0.5s);
+    &:active {
+      @include scale(0.9);
     }
   }
 
@@ -42,8 +55,12 @@
     margin           : 10px 0;
     padding          : 10px;
     width            : 300px;
-    @media (max-width : $screen-xs-min/2) {
-      width : 200px;
+    @media (max-width : $screen-xs-min) {
+      width : 90%;
+    }
+    @include transition(transform 0.5s);
+    &:active {
+      @include scale(0.9);
     }
   }
 
