@@ -1,8 +1,7 @@
 {
-  "name"           : "Tic Tac Toe",
+  "name"           : "dooozestan",
   "version"        : "1.0.0",
-  "description"    : "A Tic Tac Toe game for friends to play with each other wherever they are, whatever device they use.
-  ",
+  "description"    : "A Tic Tac Toe game for friends to play with each other wherever they are, whatever device they use. Enjoy !",
   "main"           : "index.js",
   "scripts"        : {
     "test"         : "echo \"Error: no test specified\" && exit 1",

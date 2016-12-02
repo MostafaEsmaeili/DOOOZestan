@@ -41,13 +41,13 @@
       cursor     : pointer;
       @include transition(background-color 0.5s, transform 0.5s);
       &:hover {
-        background-color : $backgroundColor-glassy;
+        background-color : $color-backgroundColor-glassy;
       }
       &:active {
         @include scale(0.7);
       }
       &.selected {
-        background-color : $backgroundColor-glassy;
+        background-color : $color-backgroundColor-glassy;
       }
     }
   }

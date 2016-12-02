@@ -1,0 +1,49 @@
+.registerSection {
+  @include center();
+  text-align : center;
+
+  //********************************************************************************************************************
+
+  .welcome {
+    color      : white;
+    font-size  : 15px;
+    text-align : center;
+    .dooozestan {
+      font-size   : 30px;
+      font-weight : bold;
+    }
+  }
+
+  //********************************************************************************************************************
+  .userName, .passWord, .email {
+    background-color : $color-backgroundColor-glassy;
+    border           : none;
+    margin           : 10px 0;
+    padding          : 10px;
+    color            : white;
+    width            : 300px;
+    @media (max-width : $screen-xs-min/2) {
+      width : 200px;
+    }
+  }
+
+  //********************************************************************************************************************
+
+  .submit {
+    background-color : white;
+    border           : none;
+    margin           : 10px 0;
+    padding          : 10px;
+    width            : 300px;
+    @media (max-width : $screen-xs-min/2) {
+      width : 200px;
+    }
+  }
+
+  //********************************************************************************************************************
+
+  .login {
+    color      : transparentize(white, 0.5);
+    margin-top : 10px;
+  }
+}

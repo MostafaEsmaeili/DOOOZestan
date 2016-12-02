@@ -7,6 +7,7 @@ define([
 ], function ($, _, Backbone, LoginPageTemplate, LoginSectionTemplate) {
     var body      = $('body'),
         loginView = Backbone.View.extend({
+            className : 'loginView',
             template  : {
                 page   : _.template(LoginPageTemplate),
                 section: _.template(LoginSectionTemplate)
@@ -17,6 +18,7 @@ define([
             render    : function () {
                 body.removeClass().addClass('login');
                 this.$el.html(this.template.page);
+                this.$el.append(this.template.section);
                 return this;
             }
         });

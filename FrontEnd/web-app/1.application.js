@@ -1975,7 +1975,8 @@ webpackJsonp([1],[
 	            initialize: function (options) {
 	            },
 	            routes    : {
-	                ''           : 'home',
+	                // ''           : 'home',
+	                ''           : 'login',
 	                'login'      : 'login',
 	                'register'   : 'register',
 	                'profile/:id': 'profile',
@@ -2065,6 +2066,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, LoginPageTemplate, LoginSectionTemplate) {
 	    var body      = $('body'),
 	        loginView = Backbone.View.extend({
+	            className : 'loginView',
 	            template  : {
 	                page   : _.template(LoginPageTemplate),
 	                section: _.template(LoginSectionTemplate)
@@ -2075,6 +2077,7 @@ webpackJsonp([1],[
 	            render    : function () {
 	                body.removeClass().addClass('login');
 	                this.$el.html(this.template.page);
+	                this.$el.append(this.template.section);
 	                return this;
 	            }
 	        });
@@ -2091,7 +2094,7 @@ webpackJsonp([1],[
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "<div class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</div>"
 
 /***/ },
 /* 12 */
@@ -2106,6 +2109,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
+	            className : 'registerView',
 	            template  : {
 	                page   : _.template(RegisterPageTemplate),
 	                section: _.template(RegisterSectionTemplate)
@@ -2116,6 +2120,7 @@ webpackJsonp([1],[
 	            render    : function () {
 	                body.removeClass().addClass('register');
 	                this.$el.html(this.template.page);
+	                this.$el.append(this.template.section);
 	                return this;
 	            }
 	        });
@@ -2132,7 +2137,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
 
 /***/ },
 /* 15 */
@@ -2147,6 +2152,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
+	            className: 'profileView',
 	            template  : {
 	                page   : _.template(ProfilePageTemplate),
 	                section: _.template(ProfileSectionTemplate)

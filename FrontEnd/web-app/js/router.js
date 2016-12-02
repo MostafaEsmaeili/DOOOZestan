@@ -14,7 +14,8 @@ define([
             initialize: function (options) {
             },
             routes    : {
-                ''           : 'home',
+                // ''           : 'home',
+                ''           : 'login',
                 'login'      : 'login',
                 'register'   : 'register',
                 'profile/:id': 'profile',
