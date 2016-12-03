@@ -24,6 +24,16 @@
 
   //********************************************************************************************************************
 
+  .avatar {
+    width         : 100px;
+    height        : 100px;
+    @include border-radius(50px);
+    margin-bottom : 10px;
+    @include box-shadow(0 0 5px white);
+  }
+
+  //********************************************************************************************************************
+
   .userName, .passWord, .email {
     background-color : $color-backgroundColor-glassy;
     border           : none;

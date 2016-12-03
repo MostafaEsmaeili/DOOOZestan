@@ -5837,6 +5837,8 @@ button.close {
       font-size: 30px;
       font-weight: bold; }
   .loginSection .avatar {
+    width: 100px;
+    height: 100px;
     border-top-right-radius: 50px;
     border-top-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -5909,6 +5911,20 @@ button.close {
     .registerSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
+  .registerSection .avatar {
+    width: 100px;
+    height: 100px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 5px white;
+    box-shadow: 0 0 5px white; }
   .registerSection .userName, .registerSection .passWord, .registerSection .email {
     background-color: #375;
     border: none;
