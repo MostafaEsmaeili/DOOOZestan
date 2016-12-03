@@ -27,10 +27,10 @@ define([
             },
             updateCSS : function () {
                 if (window.innerHeight < 500) {
-                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
+                    $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
                 }
                 else {
-                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
+                    $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
                 }
             }
         });

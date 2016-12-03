@@ -5827,7 +5827,8 @@ button.close {
     transform: translate(-50%, -50%); }
   .loginSection.smallHeight {
     margin: auto;
-    padding-top: 50px; }
+    padding-top: 50px;
+    padding-bottom: 50px; }
   .loginSection .welcome {
     color: white;
     font-size: 15px;
@@ -5899,7 +5900,8 @@ button.close {
     transform: translate(-50%, -50%); }
   .registerSection.smallHeight {
     margin: auto;
-    padding-top: 50px; }
+    padding-top: 50px;
+    padding-bottom: 50px; }
   .registerSection .welcome {
     color: white;
     font-size: 15px;
@@ -6009,5 +6011,4 @@ button.close {
 body {
   background-color: #264;
   width: 100%;
-  min-height: 100vh;
-  overflow-y: scroll; }
+  min-height: 100vh; }

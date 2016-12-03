@@ -5,8 +5,9 @@
     @include center();
   }
   &.smallHeight {
-    margin      : auto;
-    padding-top : 50px;
+    margin         : auto;
+    padding-top    : 50px;
+    padding-bottom : 50px;
   }
 
   //********************************************************************************************************************

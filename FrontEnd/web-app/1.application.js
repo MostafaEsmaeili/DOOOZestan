@@ -2106,7 +2106,7 @@ webpackJsonp([1],[
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</div>"
+	module.exports = "<div class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</div>"
 
 /***/ },
 /* 12 */
@@ -2141,10 +2141,10 @@ webpackJsonp([1],[
 	            },
 	            updateCSS : function () {
 	                if (window.innerHeight < 500) {
-	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
+	                    $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
 	                else {
-	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
+	                    $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
 	            }
 	        });
@@ -2161,7 +2161,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\">\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
+	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
 
 /***/ },
 /* 15 */
