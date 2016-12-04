@@ -8,6 +8,9 @@ define([
     var body      = $('body'),
         loginView = Backbone.View.extend({
             className : 'loginView',
+            events    : {
+                'click .submit': 'submit'
+            },
             template  : {
                 page   : _.template(LoginPageTemplate),
                 section: _.template(LoginSectionTemplate)
@@ -32,6 +35,9 @@ define([
                 else {
                     $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
                 }
+            },
+            submit    : function () {
+                console.log("submit login");
             }
         });
     return loginView;

@@ -8,6 +8,9 @@ define([
     var body         = $('body'),
         registerView = Backbone.View.extend({
             className : 'registerView',
+            events    : {
+                'click .submit': 'submit'
+            },
             template  : {
                 page   : _.template(RegisterPageTemplate),
                 section: _.template(RegisterSectionTemplate)
@@ -32,6 +35,9 @@ define([
                 else {
                     $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
                 }
+            },
+            submit    : function () {
+                console.log("submit register");
             }
         });
     return registerView;

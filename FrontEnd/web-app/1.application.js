@@ -2067,6 +2067,9 @@ webpackJsonp([1],[
 	    var body      = $('body'),
 	        loginView = Backbone.View.extend({
 	            className : 'loginView',
+	            events    : {
+	                'click .submit': 'submit'
+	            },
 	            template  : {
 	                page   : _.template(LoginPageTemplate),
 	                section: _.template(LoginSectionTemplate)
@@ -2091,6 +2094,9 @@ webpackJsonp([1],[
 	                else {
 	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
+	            },
+	            submit    : function () {
+	                console.log("submit login");
 	            }
 	        });
 	    return loginView;
@@ -2122,6 +2128,9 @@ webpackJsonp([1],[
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
 	            className : 'registerView',
+	            events    : {
+	                'click .submit': 'submit'
+	            },
 	            template  : {
 	                page   : _.template(RegisterPageTemplate),
 	                section: _.template(RegisterSectionTemplate)
@@ -2146,6 +2155,9 @@ webpackJsonp([1],[
 	                else {
 	                    $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
+	            },
+	            submit    : function () {
+	                console.log("submit register");
 	            }
 	        });
 	    return registerView;
