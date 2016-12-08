@@ -7,6 +7,7 @@ define([
 ], function ($, _, Backbone, HomePageTemplate, HomeSectionTemplate) {
     var body     = $('body'),
         homeView = Backbone.View.extend({
+            tagName   : 'main',
             className : 'homeView',
             template  : {
                 page   : _.template(HomePageTemplate),

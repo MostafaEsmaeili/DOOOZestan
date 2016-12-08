@@ -7,6 +7,7 @@ define([
 ], function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
     var body         = $('body'),
         notFoundView = Backbone.View.extend({
+            tagName   : 'main',
             className : 'notFoundView',
             template  : {
                 page   : _.template(NotFoundPageTemplate),

@@ -6,6 +6,7 @@ define([
 ], function ($, _, Backbone, HaederSectionTemplate) {
     var body       = $('body'),
         haederView = Backbone.View.extend({
+            tagName   : 'header',
             className : 'headerView',
             template  : {
                 page: _.template(HaederSectionTemplate)

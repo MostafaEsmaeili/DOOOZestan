@@ -7,6 +7,7 @@ define([
 ], function ($, _, Backbone, LoginPageTemplate, LoginSectionTemplate) {
     var body      = $('body'),
         loginView = Backbone.View.extend({
+            tagName   : 'main',
             className : 'loginView',
             events    : {
                 'click .submit': 'submit'

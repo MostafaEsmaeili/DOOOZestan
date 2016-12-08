@@ -2024,6 +2024,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomePageTemplate, HomeSectionTemplate) {
 	    var body     = $('body'),
 	        homeView = Backbone.View.extend({
+	            tagName   : 'main',
 	            className : 'homeView',
 	            template  : {
 	                page   : _.template(HomePageTemplate),
@@ -2066,6 +2067,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, LoginPageTemplate, LoginSectionTemplate) {
 	    var body      = $('body'),
 	        loginView = Backbone.View.extend({
+	            tagName   : 'main',
 	            className : 'loginView',
 	            events    : {
 	                'click .submit': 'submit'
@@ -2112,7 +2114,7 @@ webpackJsonp([1],[
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</div>"
+	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 12 */
@@ -2127,6 +2129,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
+	            tagName   : 'main',
 	            className : 'registerView',
 	            events    : {
 	                'click .submit': 'submit'
@@ -2173,7 +2176,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/final.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</div>"
+	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/final.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 15 */
@@ -2188,7 +2191,8 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
-	            className: 'profileView',
+	            tagName   : 'main',
+	            className : 'profileView',
 	            template  : {
 	                page   : _.template(ProfilePageTemplate),
 	                section: _.template(ProfileSectionTemplate)
@@ -2234,6 +2238,7 @@ webpackJsonp([1],[
 	        gameCollection = new GameCollection(),
 	        gameModel      = new GameModel(),
 	        gameView       = Backbone.View.extend({
+	            tagName   : 'main',
 	            className : 'gameView',
 	            template  : {
 	                page   : _.template(GamePageTemplate),
@@ -2320,7 +2325,7 @@ webpackJsonp([1],[
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"playground\">\n    <div class=\"actionHolder\">\n        <div class=\"action\">1</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">2</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">3</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">4</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">5</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">6</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">7</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">8</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">9</div>\n    </div>\n</div>"
+	module.exports = "<section class=\"playground\">\n    <div class=\"actionHolder\">\n        <div class=\"action\">1</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">2</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">3</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">4</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">5</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">6</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">7</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">8</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">9</div>\n    </div>\n</section>"
 
 /***/ },
 /* 23 */
@@ -2335,6 +2340,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
 	    var body         = $('body'),
 	        notFoundView = Backbone.View.extend({
+	            tagName   : 'main',
 	            className : 'notFoundView',
 	            template  : {
 	                page   : _.template(NotFoundPageTemplate),
@@ -2376,6 +2382,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HaederSectionTemplate) {
 	    var body       = $('body'),
 	        haederView = Backbone.View.extend({
+	            tagName   : 'header',
 	            className : 'headerView',
 	            template  : {
 	                page: _.template(HaederSectionTemplate)

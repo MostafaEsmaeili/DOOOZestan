@@ -7,6 +7,7 @@ define([
 ], function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
     var body         = $('body'),
         registerView = Backbone.View.extend({
+            tagName   : 'main',
             className : 'registerView',
             events    : {
                 'click .submit': 'submit'

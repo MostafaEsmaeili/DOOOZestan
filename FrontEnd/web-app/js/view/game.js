@@ -11,6 +11,7 @@ define([
         gameCollection = new GameCollection(),
         gameModel      = new GameModel(),
         gameView       = Backbone.View.extend({
+            tagName   : 'main',
             className : 'gameView',
             template  : {
                 page   : _.template(GamePageTemplate),
