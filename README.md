@@ -1,1 +1,1 @@
-A Tic Tac Toe game, with lots of features like tournament, chat, etc, for friends to play with each other wherever they are, whatever device they use. Enjoy !
+A Tic Tac Toe game, with lots of features like tournament, chat, etc, for friends to play with each other wherever they are, whatever device they use. Enjoy !!!
