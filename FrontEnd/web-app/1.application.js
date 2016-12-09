@@ -1965,10 +1965,10 @@ webpackJsonp([1],[
 	    __webpack_require__(4),
 	    __webpack_require__(6),
 	    __webpack_require__(9),
-	    __webpack_require__(12),
-	    __webpack_require__(15),
-	    __webpack_require__(18),
-	    __webpack_require__(23),
+	    __webpack_require__(13),
+	    __webpack_require__(16),
+	    __webpack_require__(19),
+	    __webpack_require__(24),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
 	    var body      = $('body'),
 	        appRouter = Backbone.Router.extend({
@@ -2064,32 +2064,39 @@ webpackJsonp([1],[
 	    __webpack_require__(4),
 	    __webpack_require__(10),
 	    __webpack_require__(11),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, LoginPageTemplate, LoginSectionTemplate) {
+	    __webpack_require__(12),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, LoginPageTemplate, LoginSectionTemplate) {
 	    var body      = $('body'),
 	        loginView = Backbone.View.extend({
-	            tagName   : 'main',
-	            className : 'loginView',
-	            events    : {
-	                'click .submit': 'submit'
+	            tagName    : 'main',
+	            className  : 'loginView',
+	            events     : {
+	                'click .submit': 'submit',
 	            },
-	            template  : {
+	            template   : {
 	                page   : _.template(LoginPageTemplate),
 	                section: _.template(LoginSectionTemplate)
 	            },
-	            initialize: function () {
-	                this.render();
+	            initialize : function () {
 	                $(window).on("resize", this.updateCSS);
+	                this.render();
 	            },
-	            render    : function () {
+	            render     : function () {
 	                var _this = this;
 	                body.removeClass().addClass('login');
 	                this.$el.html(this.template.page);
-	                this.$el.append(this.template.section).promise().done(function () {
+	                $.when(
+	                    this.$el.append(this.template.section)
+	                ).then(function () {
 	                    _this.updateCSS();
+	                    _this.fillInputs();
 	                });
 	                return this;
 	            },
-	            updateCSS : function () {
+	            afterRender: function () {
+	                this.fillInputs();
+	            },
+	            updateCSS  : function () {
 	                if (window.innerHeight < 500) {
 	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
@@ -2097,8 +2104,21 @@ webpackJsonp([1],[
 	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
 	            },
-	            submit    : function () {
-	                console.log("submit login");
+	            fillInputs : function () {
+	                var userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
+	                    passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false;
+	                if (userNameValue) {
+	                    $('.userName').attr('placeholder', '').val(userNameValue);
+	                }
+	                if (passWordValue) {
+	                    $('.passWord').attr('placeholder', '').val(passWordValue);
+	                }
+	            },
+	            submit     : function () {
+	                var userName = $('.userName').val(),
+	                    passWord = $('.passWord').val();
+	                JS_Cookie.set('userName', userName);
+	                JS_Cookie.set('passWord', passWord);
 	            }
 	        });
 	    return loginView;
@@ -2106,26 +2126,188 @@ webpackJsonp([1],[
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = ""
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * JavaScript Cookie v2.1.3
+	 * https://github.com/js-cookie/js-cookie
+	 *
+	 * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+	 * Released under the MIT license
+	 */
+	;(function (factory) {
+		var registeredInModuleLoader = false;
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			registeredInModuleLoader = true;
+		}
+		if (true) {
+			module.exports = factory();
+			registeredInModuleLoader = true;
+		}
+		if (!registeredInModuleLoader) {
+			var OldCookies = window.Cookies;
+			var api = window.Cookies = factory();
+			api.noConflict = function () {
+				window.Cookies = OldCookies;
+				return api;
+			};
+		}
+	}(function () {
+		function extend () {
+			var i = 0;
+			var result = {};
+			for (; i < arguments.length; i++) {
+				var attributes = arguments[ i ];
+				for (var key in attributes) {
+					result[key] = attributes[key];
+				}
+			}
+			return result;
+		}
+
+		function init (converter) {
+			function api (key, value, attributes) {
+				var result;
+				if (typeof document === 'undefined') {
+					return;
+				}
+
+				// Write
+
+				if (arguments.length > 1) {
+					attributes = extend({
+						path: '/'
+					}, api.defaults, attributes);
+
+					if (typeof attributes.expires === 'number') {
+						var expires = new Date();
+						expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+						attributes.expires = expires;
+					}
+
+					try {
+						result = JSON.stringify(value);
+						if (/^[\{\[]/.test(result)) {
+							value = result;
+						}
+					} catch (e) {}
+
+					if (!converter.write) {
+						value = encodeURIComponent(String(value))
+							.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+					} else {
+						value = converter.write(value, key);
+					}
+
+					key = encodeURIComponent(String(key));
+					key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+					key = key.replace(/[\(\)]/g, escape);
+
+					return (document.cookie = [
+						key, '=', value,
+						attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+						attributes.path ? '; path=' + attributes.path : '',
+						attributes.domain ? '; domain=' + attributes.domain : '',
+						attributes.secure ? '; secure' : ''
+					].join(''));
+				}
+
+				// Read
+
+				if (!key) {
+					result = {};
+				}
+
+				// To prevent the for loop in the first place assign an empty array
+				// in case there are no cookies at all. Also prevents odd result when
+				// calling "get()"
+				var cookies = document.cookie ? document.cookie.split('; ') : [];
+				var rdecode = /(%[0-9A-Z]{2})+/g;
+				var i = 0;
+
+				for (; i < cookies.length; i++) {
+					var parts = cookies[i].split('=');
+					var cookie = parts.slice(1).join('=');
+
+					if (cookie.charAt(0) === '"') {
+						cookie = cookie.slice(1, -1);
+					}
+
+					try {
+						var name = parts[0].replace(rdecode, decodeURIComponent);
+						cookie = converter.read ?
+							converter.read(cookie, name) : converter(cookie, name) ||
+							cookie.replace(rdecode, decodeURIComponent);
+
+						if (this.json) {
+							try {
+								cookie = JSON.parse(cookie);
+							} catch (e) {}
+						}
+
+						if (key === name) {
+							result = cookie;
+							break;
+						}
+
+						if (!key) {
+							result[name] = cookie;
+						}
+					} catch (e) {}
+				}
+
+				return result;
+			}
+
+			api.set = api;
+			api.get = function (key) {
+				return api.call(api, key);
+			};
+			api.getJSON = function () {
+				return api.apply({
+					json: true
+				}, [].slice.call(arguments));
+			};
+			api.defaults = {};
+
+			api.remove = function (key, attributes) {
+				api(key, '', extend(attributes, {
+					expires: -1
+				}));
+			};
+
+			api.withConverter = init;
+
+			return api;
+		}
+
+		return init(function () {});
+	}));
+
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <button class=\"submit\">\n        Login\n    </button>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+	module.exports = ""
 
 /***/ },
 /* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(13),
 	    __webpack_require__(14),
+	    __webpack_require__(15),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
@@ -2160,34 +2342,33 @@ webpackJsonp([1],[
 	                }
 	            },
 	            submit    : function () {
-	                console.log("submit register");
 	            }
 	        });
 	    return registerView;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/final.jpg\" alt=\"\" class=\"avatar\">\n    <br>\n    <input type=\"text\" placeholder=\"Username\" class=\"userName\" autofocus>\n    <br>\n    <input type=\"password\" placeholder=\"Password\" class=\"passWord\">\n    <br>\n    <input type=\"email\" placeholder=\"EMail\" class=\"email\">\n    <br>\n    <button class=\"submit\">\n        Register\n    </button>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/final.jpg\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(16),
 	    __webpack_require__(17),
+	    __webpack_require__(18),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
@@ -2210,12 +2391,6 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 16 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
 /* 17 */
 /***/ function(module, exports) {
 
@@ -2223,16 +2398,22 @@ webpackJsonp([1],[
 
 /***/ },
 /* 18 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(19),
 	    __webpack_require__(20),
 	    __webpack_require__(21),
-	    __webpack_require__(22)
+	    __webpack_require__(22),
+	    __webpack_require__(23)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
 	    var body           = $('body'),
 	        gameCollection = new GameCollection(),
@@ -2253,20 +2434,26 @@ webpackJsonp([1],[
 	            render    : function () {
 	                var _this = this;
 	                body.removeClass().addClass('game');
-	                // gameCollection.fetch({
-	                //     success: function () {
-	                //         gameCollection.each(function (model) {
-	                //             _this.$el.html(_this.template.page({
-	                //                 model: model
-	                //             }));
-	                //         });
-	                //         _this.$el.append(_this.template.section);
-	                //     }
-	                // });
-	                // gameModel.fetch({
-	                //     success: function (model) {
-	                //     }
-	                // });
+	                gameCollection.fetch({
+	                    success: function () {
+	                        console.log('gameCollection: ', gameCollection);
+	                        console.log('gameCollection.models: ', gameCollection.models);
+	                        console.log('gameCollection.models[0]: ', gameCollection.models[0]);
+	                        console.log("gameCollection.models[0].get('Data'): ", gameCollection.models[0].get('Data'));
+	                        gameCollection.each(function (model, index) {
+	                            console.log("model: ", model);
+	                            console.log("index: ", index);
+	                            _this.$el.html(_this.template.page({
+	                                model: model
+	                            }));
+	                        });
+	                        _this.$el.append(_this.template.section);
+	                    }
+	                });
+	                gameModel.fetch({
+	                    success: function (model) {
+	                    }
+	                });
 	                _this.$el.html(_this.template.page({}));
 	                _this.$el.append(_this.template.section);
 	                return this;
@@ -2280,17 +2467,18 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(20),
+	    __webpack_require__(21),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameModel) {
 	    var gameCollection = Backbone.Collection.extend({
-	        url       : 'http://192.168.1.103/Doozestan.WebApi/API/Game/',
+	        // url       : 'http://192.168.1.103/Doozestan.WebApi/API/Game/',
+	        url       : 'http://doozestan.css89iha.ir/api/game/',
 	        model     : GameModel,
 	        initialize: function () {
 	        }
@@ -2299,7 +2487,7 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
@@ -2308,35 +2496,37 @@ webpackJsonp([1],[
 	    __webpack_require__(4)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone) {
 	    var gameModel = Backbone.Model.extend({
-	        urlRoot   : 'http://192.168.1.103/Doozestan.WebApi/API/Game/3',
-	        initialize: function () {
+	        idAttribute: "_id",
+	        // urlRoot   : 'http://192.168.1.103/Doozestan.WebApi/API/Game/3',
+	        urlRoot    : 'http://doozestan.css89iha.ir/api/game/3',
+	        initialize : function () {
 	        },
 	    });
 	    return gameModel;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"playground\">\n    <div class=\"actionHolder\">\n        <div class=\"action\">1</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">2</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">3</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">4</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">5</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">6</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">7</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">8</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">9</div>\n    </div>\n</section>"
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(24),
 	    __webpack_require__(25),
+	    __webpack_require__(26),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
 	    var body         = $('body'),
 	        notFoundView = Backbone.View.extend({
@@ -2359,12 +2549,6 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 24 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
 /* 25 */
 /***/ function(module, exports) {
 
@@ -2372,13 +2556,19 @@ webpackJsonp([1],[
 
 /***/ },
 /* 26 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(27),
+	    __webpack_require__(28),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HaederSectionTemplate) {
 	    var body       = $('body'),
 	        haederView = Backbone.View.extend({
@@ -2400,7 +2590,7 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = ""

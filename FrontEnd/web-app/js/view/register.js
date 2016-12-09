@@ -38,7 +38,6 @@ define([
                 }
             },
             submit    : function () {
-                console.log("submit register");
             }
         });
     return registerView;
