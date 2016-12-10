@@ -7,20 +7,21 @@ define([
 ], function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
     var body         = $('body'),
         registerView = Backbone.View.extend({
-            tagName   : 'main',
-            className : 'registerView',
-            events    : {
-                'click .submit': 'submit'
+            tagName     : 'main',
+            className   : 'registerView',
+            events      : {
+                'click .submit'    : 'submit',
+                'change .inputfile': 'avatarUpload'
             },
-            template  : {
+            template    : {
                 page   : _.template(RegisterPageTemplate),
                 section: _.template(RegisterSectionTemplate)
             },
-            initialize: function () {
+            initialize  : function () {
                 this.render();
                 $(window).on("resize", this.updateCSS);
             },
-            render    : function () {
+            render      : function () {
                 var _this = this;
                 body.removeClass().addClass('register');
                 this.$el.html(this.template.page);
@@ -29,7 +30,7 @@ define([
                 });
                 return this;
             },
-            updateCSS : function () {
+            updateCSS   : function () {
                 if (window.innerHeight < 500) {
                     $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
                 }
@@ -37,7 +38,24 @@ define([
                     $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
                 }
             },
-            submit    : function () {
+            submit      : function () {
+            },
+            avatarUpload: function (e) {
+                var thisEl = $(e.currentTarget),
+                    regex  = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test(thisEl.val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader    = new FileReader();
+                        reader.onload = function (e) {
+                            $(".avatar").attr("src", e.target.result);
+                        };
+                        reader.readAsDataURL(thisEl[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                } else {
+                    alert("Please upload a valid image file.");
+                }
             }
         });
     return registerView;
