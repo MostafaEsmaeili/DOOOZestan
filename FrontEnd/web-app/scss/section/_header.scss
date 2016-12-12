@@ -1,2 +1,31 @@
 .headerView {
+  height  : 50px;
+  width   : 100%;
+  padding : 10px;
+  @include make-row();
+  margin  : 0;
+  .leftMenu {
+    @include make-xs-column(8);
+    padding : 0;
+    .hamburgerMenu {
+      color     : white;
+      font-size : 25px;
+      padding   : 5px;
+      cursor    : pointer;
+    }
+    .register, .login {
+      color           : white;
+      text-decoration : none;
+      padding         : 5px;
+    }
+  }
+  .logo {
+    @include make-xs-column(4);
+    text-align : right;
+    padding    : 0;
+    .logoImage {
+      width  : 40px;
+      height : 40px;
+    }
+  }
 }

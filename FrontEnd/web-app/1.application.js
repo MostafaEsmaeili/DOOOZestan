@@ -1971,12 +1971,13 @@ webpackJsonp([1],[
 	    __webpack_require__(24),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
 	    var body      = $('body'),
+	        main      = $('main'),
 	        appRouter = Backbone.Router.extend({
 	            initialize: function (options) {
 	            },
 	            routes    : {
-	                // ''           : 'home',
-	                ''           : 'login',
+	                ''           : 'home',
+	                // ''           : 'login',
 	                'login'      : 'login',
 	                'register'   : 'register',
 	                'profile/:id': 'profile',
@@ -1985,27 +1986,27 @@ webpackJsonp([1],[
 	            },
 	            home      : function () {
 	                var homeView = new HomeView();
-	                body.html(homeView.$el);
+	                main.html(homeView.$el);
 	            },
 	            login     : function () {
 	                var loginView = new LoginView();
-	                body.html(loginView.$el);
+	                main.html(loginView.$el);
 	            },
 	            register  : function () {
 	                var registerView = new RegisterView();
-	                body.html(registerView.$el);
+	                main.html(registerView.$el);
 	            },
 	            profile   : function (id) {
 	                var profileView = new ProfileView();
-	                body.html(profileView.$el);
+	                main.html(profileView.$el);
 	            },
 	            game      : function (id) {
 	                var gameView = new GameView(id);
-	                body.html(gameView.$el);
+	                main.html(gameView.$el);
 	            },
 	            notFound  : function (path) {
 	                var notFoundView = new NotFoundView(path);
-	                body.html(notFoundView.$el);
+	                main.html(notFoundView.$el);
 	            }
 	        });
 	    return appRouter;
@@ -2024,7 +2025,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomePageTemplate, HomeSectionTemplate) {
 	    var body     = $('body'),
 	        homeView = Backbone.View.extend({
-	            tagName   : 'main',
+	            tagName   : 'section',
 	            className : 'homeView',
 	            template  : {
 	                page   : _.template(HomePageTemplate),
@@ -2070,7 +2071,7 @@ webpackJsonp([1],[
 	        userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
 	        passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false,
 	        loginView     = Backbone.View.extend({
-	            tagName     : 'main',
+	            tagName     : 'section',
 	            className   : 'loginView',
 	            events      : {
 	                'click .submit'    : 'submit',
@@ -2115,6 +2116,7 @@ webpackJsonp([1],[
 	            submit      : function () {
 	                JS_Cookie.set('userName', $('.userName').val());
 	                JS_Cookie.set('passWord', $('.passWord').val());
+	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
 	            avatarUpload: function (e) {
 	                var thisEl = $(e.currentTarget),
@@ -2309,7 +2311,7 @@ webpackJsonp([1],[
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required />\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required />\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 13 */
@@ -2324,7 +2326,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
-	            tagName     : 'main',
+	            tagName     : 'section',
 	            className   : 'registerView',
 	            events      : {
 	                'click .submit'    : 'submit',
@@ -2356,6 +2358,9 @@ webpackJsonp([1],[
 	                }
 	            },
 	            submit      : function () {
+	                // JS_Cookie.set('userName', $('.userName').val());
+	                // JS_Cookie.set('passWord', $('.passWord').val());
+	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
 	            avatarUpload: function (e) {
 	                var thisEl = $(e.currentTarget),
@@ -2388,7 +2393,7 @@ webpackJsonp([1],[
 /* 15 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/final.jpg\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required/>\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required/>\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 16 */
@@ -2403,7 +2408,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
-	            tagName   : 'main',
+	            tagName   : 'section',
 	            className : 'profileView',
 	            template  : {
 	                page   : _.template(ProfilePageTemplate),
@@ -2450,7 +2455,7 @@ webpackJsonp([1],[
 	        gameCollection = new GameCollection(),
 	        gameModel      = new GameModel(),
 	        gameView       = Backbone.View.extend({
-	            tagName   : 'main',
+	            tagName   : 'section',
 	            className : 'gameView',
 	            template  : {
 	                page   : _.template(GamePageTemplate),
@@ -2561,7 +2566,7 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
 	    var body         = $('body'),
 	        notFoundView = Backbone.View.extend({
-	            tagName   : 'main',
+	            tagName   : 'section',
 	            className : 'notFoundView',
 	            template  : {
 	                page   : _.template(NotFoundPageTemplate),
@@ -2624,7 +2629,7 @@ webpackJsonp([1],[
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = ""
+	module.exports = "<nav class=\"leftMenu\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#register\" class=\"register\">Register</a>\n    <a href=\"#login\" class=\"login\">Login</a>\n</nav>\n<a href=\"#\" class=\"logo\">\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n</a>"
 
 /***/ }
 ]);

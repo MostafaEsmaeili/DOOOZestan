@@ -10,12 +10,13 @@ define([
     'view/notFound',
 ], function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
     var body      = $('body'),
+        main      = $('main'),
         appRouter = Backbone.Router.extend({
             initialize: function (options) {
             },
             routes    : {
-                // ''           : 'home',
-                ''           : 'login',
+                ''           : 'home',
+                // ''           : 'login',
                 'login'      : 'login',
                 'register'   : 'register',
                 'profile/:id': 'profile',
@@ -24,27 +25,27 @@ define([
             },
             home      : function () {
                 var homeView = new HomeView();
-                body.html(homeView.$el);
+                main.html(homeView.$el);
             },
             login     : function () {
                 var loginView = new LoginView();
-                body.html(loginView.$el);
+                main.html(loginView.$el);
             },
             register  : function () {
                 var registerView = new RegisterView();
-                body.html(registerView.$el);
+                main.html(registerView.$el);
             },
             profile   : function (id) {
                 var profileView = new ProfileView();
-                body.html(profileView.$el);
+                main.html(profileView.$el);
             },
             game      : function (id) {
                 var gameView = new GameView(id);
-                body.html(gameView.$el);
+                main.html(gameView.$el);
             },
             notFound  : function (path) {
                 var notFoundView = new NotFoundView(path);
-                body.html(notFoundView.$el);
+                main.html(notFoundView.$el);
             }
         });
     return appRouter;

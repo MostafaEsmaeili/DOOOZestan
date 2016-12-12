@@ -7,7 +7,7 @@ define([
 ], function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
     var body        = $('body'),
         profileView = Backbone.View.extend({
-            tagName   : 'main',
+            tagName   : 'section',
             className : 'profileView',
             template  : {
                 page   : _.template(ProfilePageTemplate),
