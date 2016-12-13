@@ -2628,6 +2628,7 @@ webpackJsonp([1],[
 	            },
 	            showSidebar: function () {
 	                $('.sidebarView').addClass('visible');
+	                body.addClass('noScroll');
 	            }
 	        });
 	    return headerView;
@@ -2647,7 +2648,9 @@ webpackJsonp([1],[
 	        sidebarView = Backbone.View.extend({
 	            tagName     : 'aside',
 	            className   : 'sidebarView',
-	            events      : {},
+	            events      : {
+	                'click .settings': 'preventClick'
+	            },
 	            template    : {
 	                page: _.template(SidebarSectionTemplate),
 	            },
@@ -2662,6 +2665,10 @@ webpackJsonp([1],[
 	            },
 	            closeSidebar: function () {
 	                $('.sidebarView').removeClass('visible');
+	                body.removeClass('noScroll');
+	            },
+	            preventClick: function (e) {
+	                e.stopPropagation();
 	            }
 	        });
 	    return sidebarView;
@@ -2671,7 +2678,7 @@ webpackJsonp([1],[
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"settings\"></section>"
+	module.exports = "<section class=\"settings\">\n    <a href=\"#\" class=\"userInfo\">\n        <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n        <div class=\"name\">Ehsan Amiri</div>\n        <div class=\"phone\">+98-9371508772</div>\n    </a>\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n        </ul>\n    </nav>\n</section>"
 
 /***/ },
 /* 30 */

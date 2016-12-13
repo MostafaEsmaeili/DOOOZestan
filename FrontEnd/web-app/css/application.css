@@ -5907,16 +5907,60 @@ button.close {
       -o-transform: translate(0, 0);
       transform: translate(0, 0); }
   .sidebarView .settings {
-    width: 200px;
+    width: 300px;
     height: 100vh;
     background-color: #455;
+    padding: 20px;
+    overflow-y: auto;
     -webkit-transform: translate(-200px, 0);
     -ms-transform: translate(-200px, 0);
     -o-transform: translate(-200px, 0);
     transform: translate(-200px, 0);
     -webkit-transition: transform 0.5s;
     -o-transition: transform 0.5s;
-    transition: transform 0.5s; }
+    transition: transform 0.5s;
+    color: white; }
+    .sidebarView .settings .userInfo {
+      display: block;
+      text-decoration: none;
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      padding-bottom: 30px;
+      padding-top: 10px;
+      margin-bottom: 15px; }
+      .sidebarView .settings .userInfo .avatar {
+        width: 50px;
+        height: 50px;
+        border-top-right-radius: 50%;
+        border-top-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-top-left-radius: 50%;
+        -webkit-box-shadow: 0 0 5px white;
+        box-shadow: 0 0 5px white;
+        margin-bottom: 10px; }
+      .sidebarView .settings .userInfo .name {
+        font-weight: bold; }
+      .sidebarView .settings .userInfo .phone {
+        font-size: 10px; }
+    .sidebarView .settings .options .optionsUL {
+      list-style-type: none;
+      padding: 0; }
+      .sidebarView .settings .options .optionsUL .optionsLI .optionsLink {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        -webkit-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink:hover {
+          background-color: #344; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink .icon {
+          width: 30px; }
 
 .loginSection {
   width: 100%;
@@ -6160,3 +6204,6 @@ body {
   background-color: #344;
   width: 100%;
   min-height: 100vh; }
+
+.noScroll {
+  overflow: hidden; }

@@ -8,7 +8,9 @@ define([
         sidebarView = Backbone.View.extend({
             tagName     : 'aside',
             className   : 'sidebarView',
-            events      : {},
+            events      : {
+                'click .settings': 'preventClick'
+            },
             template    : {
                 page: _.template(SidebarSectionTemplate),
             },
@@ -23,6 +25,10 @@ define([
             },
             closeSidebar: function () {
                 $('.sidebarView').removeClass('visible');
+                body.removeClass('noScroll');
+            },
+            preventClick: function (e) {
+                e.stopPropagation();
             }
         });
     return sidebarView;

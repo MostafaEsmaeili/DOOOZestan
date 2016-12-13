@@ -26,6 +26,7 @@ define([
             },
             showSidebar: function () {
                 $('.sidebarView').addClass('visible');
+                body.addClass('noScroll');
             }
         });
     return headerView;
