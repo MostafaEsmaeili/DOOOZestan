@@ -2605,31 +2605,79 @@ webpackJsonp([1],[
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(28),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HaederSectionTemplate) {
-	    var body       = $('body'),
-	        haederView = Backbone.View.extend({
-	            tagName   : 'header',
-	            className : 'headerView',
-	            template  : {
-	                page: _.template(HaederSectionTemplate)
+	    __webpack_require__(30),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, SidebarView, HeaderSectionTemplate) {
+	    var body        = $('body'),
+	        sidebarView = new SidebarView(),
+	        headerView  = Backbone.View.extend({
+	            tagName    : 'header',
+	            className  : 'headerView',
+	            events     : {
+	                'click .hamburgerMenu': 'showSidebar'
 	            },
-	            initialize: function () {
+	            template   : {
+	                page: _.template(HeaderSectionTemplate),
+	            },
+	            initialize : function () {
 	                this.render();
 	            },
-	            render    : function () {
+	            render     : function () {
 	                this.$el.html(this.template.page);
 	                body.prepend(this.$el);
 	                return this;
+	            },
+	            showSidebar: function () {
+	                $('.sidebarView').addClass('visible');
 	            }
 	        });
-	    return haederView;
+	    return headerView;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
 /* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	    __webpack_require__(1),
+	    __webpack_require__(3),
+	    __webpack_require__(4),
+	    __webpack_require__(29),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, SidebarSectionTemplate) {
+	    var body        = $('body'),
+	        sidebarView = Backbone.View.extend({
+	            tagName     : 'aside',
+	            className   : 'sidebarView',
+	            events      : {},
+	            template    : {
+	                page: _.template(SidebarSectionTemplate),
+	            },
+	            initialize  : function () {
+	                this.render();
+	            },
+	            render      : function () {
+	                this.$el.html(this.template.page);
+	                body.prepend(this.$el);
+	                this.$el.on('click', this.closeSidebar);
+	                return this;
+	            },
+	            closeSidebar: function () {
+	                $('.sidebarView').removeClass('visible');
+	            }
+	        });
+	    return sidebarView;
+	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav class=\"leftMenu\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#register\" class=\"register\">Register</a>\n    <a href=\"#login\" class=\"login\">Login</a>\n</nav>\n<a href=\"#\" class=\"logo\">\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n</a>"
+	module.exports = "<section class=\"settings\"></section>"
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	module.exports = "<nav class=\"leftMenu\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#register\" class=\"register\">Register</a>\n    <a href=\"#login\" class=\"login\">Login</a>\n</nav>\n<a href=\"#game/1\" class=\"logo\">\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n</a>"
 
 /***/ }
 ]);

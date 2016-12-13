@@ -1,0 +1,25 @@
+.sidebarView {
+  width            : 100vw;
+  height           : 100vh;
+  background-color : transparentize(black, 0.5);
+  position         : fixed;
+  z-index          : $zIndex-sidebar;
+  @include translate(0, -60px);
+  @include opacity(0);
+  visibility       : hidden;
+  @include transition(opacity 0.5s);
+  &.visible {
+    visibility : visible;
+    @include opacity(1);
+    .settings {
+      @include translate(0, 0);
+    }
+  }
+  .settings {
+    width            : 200px;
+    height           : 100vh;
+    background-color : $color-backgroundColor-glassy;
+    @include translate(-200px, 0);
+    @include transition(transform 0.5s);
+  }
+}
