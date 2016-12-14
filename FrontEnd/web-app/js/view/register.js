@@ -7,7 +7,7 @@ define([
 ], function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
     var body         = $('body'),
         registerView = Backbone.View.extend({
-            tagName     : 'main',
+            tagName     : 'section',
             className   : 'registerView',
             events      : {
                 'click .submit'    : 'submit',
@@ -39,6 +39,9 @@ define([
                 }
             },
             submit      : function () {
+                // JS_Cookie.set('userName', $('.userName').val());
+                // JS_Cookie.set('passWord', $('.passWord').val());
+                Backbone.history.navigate('game/1', {trigger: true});
             },
             avatarUpload: function (e) {
                 var thisEl = $(e.currentTarget),

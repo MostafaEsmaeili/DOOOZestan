@@ -10,7 +10,7 @@ define([
         userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
         passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false,
         loginView     = Backbone.View.extend({
-            tagName     : 'main',
+            tagName     : 'section',
             className   : 'loginView',
             events      : {
                 'click .submit'    : 'submit',
@@ -55,6 +55,7 @@ define([
             submit      : function () {
                 JS_Cookie.set('userName', $('.userName').val());
                 JS_Cookie.set('passWord', $('.passWord').val());
+                Backbone.history.navigate('game/1', {trigger: true});
             },
             avatarUpload: function (e) {
                 var thisEl = $(e.currentTarget),

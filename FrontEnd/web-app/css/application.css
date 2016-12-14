@@ -5814,6 +5814,154 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.headerView {
+  height: 60px;
+  width: 100%;
+  padding: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin: 0;
+  background-color: #455; }
+  .headerView:before, .headerView:after {
+    content: " ";
+    display: table; }
+  .headerView:after {
+    clear: both; }
+  .headerView .leftMenu {
+    position: relative;
+    float: left;
+    width: 66.66667%;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding: 0; }
+    .headerView .leftMenu .hamburgerMenu {
+      color: white;
+      font-size: 25px;
+      padding: 5px;
+      cursor: pointer;
+      -webkit-transition: transform 0.5s, color 0.5s;
+      -o-transition: transform 0.5s, color 0.5s;
+      transition: transform 0.5s, color 0.5s; }
+      .headerView .leftMenu .hamburgerMenu:active {
+        -webkit-transform: scale(0.09);
+        -ms-transform: scale(0.09);
+        -o-transform: scale(0.09);
+        transform: scale(0.09);
+        color: green; }
+    .headerView .leftMenu .register, .headerView .leftMenu .login {
+      color: white;
+      text-decoration: none;
+      padding: 5px;
+      -webkit-transition: color 0.5s;
+      -o-transition: color 0.5s;
+      transition: color 0.5s; }
+      .headerView .leftMenu .register:active, .headerView .leftMenu .login:active {
+        color: green; }
+  .headerView .logo {
+    position: relative;
+    float: left;
+    width: 33.33333%;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: right;
+    padding: 0; }
+    .headerView .logo .logoImage {
+      width: 40px;
+      height: 40px;
+      border-top-right-radius: 50%;
+      border-top-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 50%;
+      -webkit-box-shadow: 0 0 5px white;
+      box-shadow: 0 0 5px white; }
+
+.sidebarView {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1;
+  -webkit-transform: translate(0, -60px);
+  -ms-transform: translate(0, -60px);
+  -o-transform: translate(0, -60px);
+  transform: translate(0, -60px);
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s; }
+  .sidebarView.visible {
+    visibility: visible;
+    opacity: 1;
+    filter: alpha(opacity=100); }
+    .sidebarView.visible .settings {
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0); }
+  .sidebarView .settings {
+    width: 300px;
+    height: 100vh;
+    background-color: #455;
+    padding: 20px;
+    overflow-y: auto;
+    -webkit-transform: translate(-200px, 0);
+    -ms-transform: translate(-200px, 0);
+    -o-transform: translate(-200px, 0);
+    transform: translate(-200px, 0);
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    color: white; }
+    .sidebarView .settings .userInfo {
+      display: block;
+      text-decoration: none;
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      padding-bottom: 30px;
+      padding-top: 10px;
+      margin-bottom: 15px; }
+      .sidebarView .settings .userInfo .avatar {
+        width: 50px;
+        height: 50px;
+        border-top-right-radius: 50%;
+        border-top-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-top-left-radius: 50%;
+        -webkit-box-shadow: 0 0 5px white;
+        box-shadow: 0 0 5px white;
+        margin-bottom: 10px; }
+      .sidebarView .settings .userInfo .name {
+        font-weight: bold; }
+      .sidebarView .settings .userInfo .phone {
+        font-size: 10px; }
+    .sidebarView .settings .options .optionsUL {
+      list-style-type: none;
+      padding: 0; }
+      .sidebarView .settings .options .optionsUL .optionsLI .optionsLink {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        -webkit-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink:hover {
+          background-color: #344; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink .icon {
+          width: 30px; }
+
 .loginSection {
   width: 100%;
   text-align: center; }
@@ -5851,7 +5999,7 @@ button.close {
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
   .loginSection .userName, .loginSection .passWord, .loginSection .inputfile + label {
-    background-color: #375;
+    background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
@@ -5940,7 +6088,7 @@ button.close {
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
   .registerSection .userName, .registerSection .passWord, .registerSection .email, .registerSection .inputfile + label {
-    background-color: #375;
+    background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
@@ -6043,16 +6191,19 @@ button.close {
       -o-transition: background-color 0.5s, transform 0.5s;
       transition: background-color 0.5s, transform 0.5s; }
       .playground .actionHolder .action:hover {
-        background-color: #375; }
+        background-color: #455; }
       .playground .actionHolder .action:active {
         -webkit-transform: scale(0.7);
         -ms-transform: scale(0.7);
         -o-transform: scale(0.7);
         transform: scale(0.7); }
       .playground .actionHolder .action.selected {
-        background-color: #375; }
+        background-color: #455; }
 
 body {
-  background-color: #264;
+  background-color: #344;
   width: 100%;
   min-height: 100vh; }
+
+.noScroll {
+  overflow: hidden; }

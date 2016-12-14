@@ -1,2 +1,43 @@
 .headerView {
+  height           : 60px;
+  width            : 100%;
+  padding          : 10px;
+  @include make-row();
+  margin           : 0;
+  background-color : $color-backgroundColor-glassy;
+  .leftMenu {
+    @include make-xs-column(8);
+    padding : 0;
+    .hamburgerMenu {
+      color     : white;
+      font-size : 25px;
+      padding   : 5px;
+      cursor    : pointer;
+      @include transition(transform 0.5s, color 0.5s);
+      &:active {
+        @include scale(0.09);
+        color : green;
+      }
+    }
+    .register, .login {
+      color           : white;
+      text-decoration : none;
+      padding         : 5px;
+      @include transition(color 0.5s);
+      &:active {
+        color : green;
+      }
+    }
+  }
+  .logo {
+    @include make-xs-column(4);
+    text-align : right;
+    padding    : 0;
+    .logoImage {
+      width  : 40px;
+      height : 40px;
+      @include border-radius(50%);
+      @include box-shadow(0 0 5px white);
+    }
+  }
 }
