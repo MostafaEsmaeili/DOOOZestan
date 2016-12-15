@@ -1,10 +1,10 @@
 <section class="settings">
     <section class="userInfo">
         <input type="file" name="file" id="file" class="inputFile" required/>
-        <label for="file" class="<%- (userIsLogin) ? '' : 'isNotLoginLabel' %>">
-            <img src="<%- (userIsLogin) ? 'img/avatar.jpg' : 'img/default-user.png' %>" alt="" class="avatar">
+        <label for="file" class="<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>">
+            <img src="<%- (userIsLogin === 'yes') ? 'img/avatar.jpg' : 'img/default-user.png' %>" alt="" class="avatar">
         </label>
-        <% if(userIsLogin){ %>
+        <% if(userIsLogin === 'yes'){ %>
         <div class="name">Ehsan Amiri</div>
         <div class="phone">+98-9371508772</div>
         <% }else{ %>

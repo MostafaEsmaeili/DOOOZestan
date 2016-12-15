@@ -25,7 +25,9 @@ define([
                 this.$el.html(this.template.page({
                     userIsLogin: JS_Cookie.get('userIsLogin')
                 }));
-                body.prepend(this.$el);
+                $('.sidebarView').remove();
+                body.append(this.$el);
+                this.$el.on('click', this.preventClick);
                 this.$el.on('click', this.closeSidebar);
                 return this;
             },
@@ -37,7 +39,8 @@ define([
                 e.stopPropagation();
             },
             logout      : function () {
-                JS_Cookie.set('userIsLogin', false);
+                JS_Cookie.set('userIsLogin', 'false');
+                this.render();
             },
             avatarUpload: function (e) {
                 var thisEl = $(e.currentTarget),

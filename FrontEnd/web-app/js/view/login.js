@@ -3,9 +3,10 @@ define([
     'underscore',
     'backbone',
     'js-cookie',
+    'sidebar',
     '../../template/page/login.html',
     '../../template/section/login.html',
-], function ($, _, Backbone, JS_Cookie, LoginPageTemplate, LoginSectionTemplate) {
+], function ($, _, Backbone, JS_Cookie, SidebarView, LoginPageTemplate, LoginSectionTemplate) {
     var body          = $('body'),
         userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
         passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false,
@@ -55,7 +56,9 @@ define([
             submit      : function () {
                 JS_Cookie.set('userName', $('.userName').val());
                 JS_Cookie.set('passWord', $('.passWord').val());
-                JS_Cookie.set('userIsLogin', true);
+                JS_Cookie.set('userIsLogin', 'yes');
+                $('.sidebarView').remove();
+                var sidebarView = new SidebarView();
                 Backbone.history.navigate('game/1', {trigger: true});
             },
             avatarUpload: function (e) {
