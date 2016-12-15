@@ -55,6 +55,7 @@ define([
             submit      : function () {
                 JS_Cookie.set('userName', $('.userName').val());
                 JS_Cookie.set('passWord', $('.passWord').val());
+                JS_Cookie.set('userIsLogin', true);
                 Backbone.history.navigate('game/1', {trigger: true});
             },
             avatarUpload: function (e) {

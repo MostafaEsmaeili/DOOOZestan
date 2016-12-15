@@ -15,23 +15,49 @@
       @include translate(0, 0);
     }
   }
+
+  //********************************************************************************************************************
+
   .settings {
     width            : 300px;
     height           : 100vh;
+    color            : white;
     background-color : $color-backgroundColor-glassy;
     padding          : 20px;
     overflow-y       : auto;
     @include translate(-200px, 0);
     @include transition(transform 0.5s);
-    color            : white;
+
+    //******************************************************************************************************************
+
     .userInfo {
-      display         : block;
-      text-decoration : none;
-      color           : white;
-      border-bottom   : 1px solid transparentize(white, 0.5);
-      padding-bottom  : 30px;
-      padding-top     : 10px;
-      margin-bottom   : 15px;
+      color          : white;
+      border-bottom  : 1px solid transparentize(white, 0.5);
+      padding-bottom : 20px;
+      padding-top    : 10px;
+      margin-bottom  : 10px;
+
+      //****************************************************************************************************************
+
+      .inputFile {
+        width    : 0.1px;
+        height   : 0.1px;
+        opacity  : 0;
+        overflow : hidden;
+        position : absolute;
+        z-index  : -1;
+      }
+      .inputFile + label {
+        display : block;
+        margin  : 10px auto;
+        cursor  : pointer;
+        &.isNotLoginLabel {
+          display : inline-block;
+        }
+      }
+
+      //****************************************************************************************************************
+
       .avatar {
         width         : 50px;
         height        : 50px;
@@ -45,7 +71,19 @@
       .phone {
         font-size : 10px;
       }
+      .login, .register {
+        color           : white;
+        text-decoration : none;
+        padding         : 10px;
+        @include transition(color 0.5s);
+        &:hover {
+          color : green;
+        }
+      }
     }
+
+    //******************************************************************************************************************
+
     .options {
       .optionsUL {
         list-style-type : none;
