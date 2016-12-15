@@ -6,6 +6,7 @@ define([
     '../../template/section/sidebar.html',
 ], function ($, _, Backbone, JS_Cookie, SidebarSectionTemplate) {
     var body        = $('body'),
+        main        = $('main'),
         sidebarView = Backbone.View.extend({
             tagName     : 'aside',
             className   : 'sidebarView',
@@ -26,7 +27,7 @@ define([
                     userIsLogin: JS_Cookie.get('userIsLogin')
                 }));
                 $('.sidebarView').remove();
-                body.append(this.$el);
+                this.$el.insertBefore(main);
                 this.$el.on('click', this.preventClick);
                 this.$el.on('click', this.closeSidebar);
                 return this;
