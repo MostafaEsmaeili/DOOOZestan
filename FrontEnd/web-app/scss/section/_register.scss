@@ -51,23 +51,23 @@
   }
 
   //********************************************************************************************************************
-
-  .inputfile {
-    width    : 0.1px;
-    height   : 0.1px;
-    opacity  : 0;
-    overflow : hidden;
-    position : absolute;
-    z-index  : -1;
-  }
-  .inputfile + label {
-    display     : block;
-    margin      : 10px auto;
-    cursor      : pointer;
-    color       : transparentize(white, 0.5);
-    font-weight : normal;
-    text-align  : left;
-  }
+  //
+  //.inputFile {
+  //  width    : 0.1px;
+  //  height   : 0.1px;
+  //  opacity  : 0;
+  //  overflow : hidden;
+  //  position : absolute;
+  //  z-index  : -1;
+  //}
+  //.inputFile + label {
+  //  display     : block;
+  //  margin      : 10px auto;
+  //  cursor      : pointer;
+  //  color       : transparentize(white, 0.5);
+  //  font-weight : normal;
+  //  text-align  : left;
+  //}
 
   //********************************************************************************************************************
 

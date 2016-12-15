@@ -1965,10 +1965,10 @@ webpackJsonp([1],[
 	    __webpack_require__(4),
 	    __webpack_require__(6),
 	    __webpack_require__(9),
-	    __webpack_require__(13),
-	    __webpack_require__(16),
-	    __webpack_require__(19),
-	    __webpack_require__(24),
+	    __webpack_require__(15),
+	    __webpack_require__(18),
+	    __webpack_require__(21),
+	    __webpack_require__(26),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
 	    var body      = $('body'),
 	        main      = $('main'),
@@ -2065,8 +2065,9 @@ webpackJsonp([1],[
 	    __webpack_require__(4),
 	    __webpack_require__(10),
 	    __webpack_require__(11),
-	    __webpack_require__(12),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, LoginPageTemplate, LoginSectionTemplate) {
+	    __webpack_require__(13),
+	    __webpack_require__(14),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarView, LoginPageTemplate, LoginSectionTemplate) {
 	    var body          = $('body'),
 	        userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
 	        passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false,
@@ -2116,6 +2117,9 @@ webpackJsonp([1],[
 	            submit      : function () {
 	                JS_Cookie.set('userName', $('.userName').val());
 	                JS_Cookie.set('passWord', $('.passWord').val());
+	                JS_Cookie.set('userIsLogin', 'yes');
+	                $('.sidebarView').remove();
+	                var sidebarView = new SidebarView();
 	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
 	            avatarUpload: function (e) {
@@ -2303,34 +2307,112 @@ webpackJsonp([1],[
 
 /***/ },
 /* 11 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required />\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
-
-/***/ },
-/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(14),
-	    __webpack_require__(15),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
+	    __webpack_require__(10),
+	    __webpack_require__(12),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarSectionTemplate) {
+	    var body        = $('body'),
+	        main        = $('main'),
+	        sidebarView = Backbone.View.extend({
+	            tagName     : 'aside',
+	            className   : 'sidebarView',
+	            events      : {
+	                'click .settings'                  : 'preventClick',
+	                'change .inputFile'                : 'avatarUpload',
+	                'click  .login, .register, .logout': 'closeSidebar',
+	                'click  .logout'                   : 'logout',
+	            },
+	            template    : {
+	                page: _.template(SidebarSectionTemplate),
+	            },
+	            initialize  : function () {
+	                this.render();
+	            },
+	            render      : function () {
+	                this.$el.html(this.template.page({
+	                    userIsLogin: JS_Cookie.get('userIsLogin')
+	                }));
+	                $('.sidebarView').remove();
+	                this.$el.insertBefore(main);
+	                this.$el.on('click', this.preventClick);
+	                this.$el.on('click', this.closeSidebar);
+	                return this;
+	            },
+	            closeSidebar: function () {
+	                $('.sidebarView').removeClass('visible');
+	                body.removeClass('noScroll');
+	            },
+	            preventClick: function (e) {
+	                e.stopPropagation();
+	            },
+	            logout      : function () {
+	                JS_Cookie.set('userIsLogin', 'false');
+	                this.render();
+	            },
+	            avatarUpload: function (e) {
+	                var thisEl = $(e.currentTarget),
+	                    regex  = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+	                if (regex.test(thisEl.val().toLowerCase())) {
+	                    if (typeof (FileReader) != "undefined") {
+	                        var reader    = new FileReader();
+	                        reader.onload = function (e) {
+	                            $(".avatar").attr("src", e.target.result);
+	                        };
+	                        reader.readAsDataURL(thisEl[0].files[0]);
+	                    } else {
+	                        alert("This browser does not support FileReader.");
+	                    }
+	                } else {
+	                    alert("Please upload a valid image file.");
+	                }
+	            }
+	        });
+	    return sidebarView;
+	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<section class=\"settings\">\n    <section class=\"userInfo\">\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>\n        <label for=\"file\" class=\"<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>\">\n            <img src=\"<%- (userIsLogin === 'yes') ? 'img/avatar.jpg' : 'img/default-user.png' %>\" alt=\"\" class=\"avatar\">\n        </label>\n        <% if(userIsLogin === 'yes'){ %>\n        <div class=\"name\">Ehsan Amiri</div>\n        <div class=\"phone\">+98-9371508772</div>\n        <% }else{ %>\n        <a href=\"#register\" class=\"register\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Register\n        </a>\n        <a href=\"#login\" class=\"login\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Login\n        </a>\n        <% } %>\n    </section>\n\n    <!-- *********************************************************************************************************** -->\n\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n            <% if(userIsLogin === 'yes'){ %>\n            <li class=\"optionsLI\">\n                <a href=\"#game/1\" class=\"optionsLink logout\">\n                    <i class=\"icon fa fa-sign-out\"></i>\n                    Log out\n                </a>\n            </li>\n            <% } %>\n        </ul>\n    </nav>\n</section>"
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required />-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	    __webpack_require__(1),
+	    __webpack_require__(3),
+	    __webpack_require__(4),
+	    __webpack_require__(10),
+	    __webpack_require__(11),
+	    __webpack_require__(16),
+	    __webpack_require__(17),
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarView, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
 	            tagName     : 'section',
 	            className   : 'registerView',
 	            events      : {
 	                'click .submit'    : 'submit',
-	                'change .inputfile': 'avatarUpload'
+	                'change .inputFile': 'avatarUpload'
 	            },
 	            template    : {
 	                page   : _.template(RegisterPageTemplate),
@@ -2360,6 +2442,9 @@ webpackJsonp([1],[
 	            submit      : function () {
 	                // JS_Cookie.set('userName', $('.userName').val());
 	                // JS_Cookie.set('passWord', $('.passWord').val());
+	                JS_Cookie.set('userIsLogin', 'yes');
+	                $('.sidebarView').remove();
+	                var sidebarView = new SidebarView();
 	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
 	            avatarUpload: function (e) {
@@ -2384,27 +2469,27 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" required/>\n        <label for=\"file\">Choose Avatar</label>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail or Phone\" class=\"email\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(17),
-	    __webpack_require__(18),
+	    __webpack_require__(19),
+	    __webpack_require__(20),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
@@ -2427,29 +2512,29 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
 /* 19 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(20),
-	    __webpack_require__(21),
 	    __webpack_require__(22),
-	    __webpack_require__(23)
+	    __webpack_require__(23),
+	    __webpack_require__(24),
+	    __webpack_require__(25)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
 	    var body           = $('body'),
 	        gameCollection = new GameCollection(),
@@ -2495,6 +2580,11 @@ webpackJsonp([1],[
 	                return this;
 	            },
 	            select    : function (e) {
+	                navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+	                if (navigator.vibrate) {
+	                    // vibration API supported
+	                    navigator.vibrate(10);
+	                }
 	                $('.action').removeClass('selected');
 	                $(e.target).addClass('selected');
 	            }
@@ -2503,14 +2593,14 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(21),
+	    __webpack_require__(23),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameModel) {
 	    var gameCollection = Backbone.Collection.extend({
 	        // url       : 'http://192.168.1.103/Doozestan.WebApi/API/Game/',
@@ -2523,7 +2613,7 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
@@ -2542,27 +2632,27 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"playground\">\n    <div class=\"actionHolder\">\n        <div class=\"action\">1</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">2</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">3</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">4</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">5</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">6</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">7</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">8</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">9</div>\n    </div>\n</section>"
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(25),
-	    __webpack_require__(26),
+	    __webpack_require__(27),
+	    __webpack_require__(28),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
 	    var body         = $('body'),
 	        notFoundView = Backbone.View.extend({
@@ -2585,26 +2675,26 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 25 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
-/* 26 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
 /* 27 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(28),
+	    __webpack_require__(11),
 	    __webpack_require__(30),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, SidebarView, HeaderSectionTemplate) {
 	    var body        = $('body'),
@@ -2635,56 +2725,10 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-	    __webpack_require__(1),
-	    __webpack_require__(3),
-	    __webpack_require__(4),
-	    __webpack_require__(29),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, SidebarSectionTemplate) {
-	    var body        = $('body'),
-	        sidebarView = Backbone.View.extend({
-	            tagName     : 'aside',
-	            className   : 'sidebarView',
-	            events      : {
-	                'click .settings': 'preventClick'
-	            },
-	            template    : {
-	                page: _.template(SidebarSectionTemplate),
-	            },
-	            initialize  : function () {
-	                this.render();
-	            },
-	            render      : function () {
-	                this.$el.html(this.template.page);
-	                body.prepend(this.$el);
-	                this.$el.on('click', this.closeSidebar);
-	                return this;
-	            },
-	            closeSidebar: function () {
-	                $('.sidebarView').removeClass('visible');
-	                body.removeClass('noScroll');
-	            },
-	            preventClick: function (e) {
-	                e.stopPropagation();
-	            }
-	        });
-	    return sidebarView;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = "<section class=\"settings\">\n    <a href=\"#\" class=\"userInfo\">\n        <img src=\"img/avatar.jpg\" alt=\"\" class=\"avatar\">\n        <div class=\"name\">Ehsan Amiri</div>\n        <div class=\"phone\">+98-9371508772</div>\n    </a>\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n        </ul>\n    </nav>\n</section>"
-
-/***/ },
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav class=\"leftMenu\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#register\" class=\"register\">Register</a>\n    <a href=\"#login\" class=\"login\">Login</a>\n</nav>\n<a href=\"#game/1\" class=\"logo\">\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n</a>"
+	module.exports = "<nav class=\"nav\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#game/1\" class=\"logo\">\n        <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n    </a>\n</nav>"
 
 /***/ }
 ]);

@@ -2,16 +2,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'js-cookie',
+    'sidebar',
     '../../template/page/register.html',
     '../../template/section/register.html',
-], function ($, _, Backbone, RegisterPageTemplate, RegisterSectionTemplate) {
+], function ($, _, Backbone, JS_Cookie, SidebarView, RegisterPageTemplate, RegisterSectionTemplate) {
     var body         = $('body'),
         registerView = Backbone.View.extend({
             tagName     : 'section',
             className   : 'registerView',
             events      : {
                 'click .submit'    : 'submit',
-                'change .inputfile': 'avatarUpload'
+                'change .inputFile': 'avatarUpload'
             },
             template    : {
                 page   : _.template(RegisterPageTemplate),
@@ -41,6 +43,9 @@ define([
             submit      : function () {
                 // JS_Cookie.set('userName', $('.userName').val());
                 // JS_Cookie.set('passWord', $('.passWord').val());
+                JS_Cookie.set('userIsLogin', 'yes');
+                $('.sidebarView').remove();
+                var sidebarView = new SidebarView();
                 Backbone.history.navigate('game/1', {trigger: true});
             },
             avatarUpload: function (e) {

@@ -5818,55 +5818,25 @@ button.close {
   height: 60px;
   width: 100%;
   padding: 10px;
-  margin-left: -15px;
-  margin-right: -15px;
   margin: 0;
   background-color: #455; }
-  .headerView:before, .headerView:after {
-    content: " ";
-    display: table; }
-  .headerView:after {
-    clear: both; }
-  .headerView .leftMenu {
-    position: relative;
+  .headerView .hamburgerMenu {
     float: left;
-    width: 66.66667%;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding: 0; }
-    .headerView .leftMenu .hamburgerMenu {
-      color: white;
-      font-size: 25px;
-      padding: 5px;
-      cursor: pointer;
-      -webkit-transition: transform 0.5s, color 0.5s;
-      -o-transition: transform 0.5s, color 0.5s;
-      transition: transform 0.5s, color 0.5s; }
-      .headerView .leftMenu .hamburgerMenu:active {
-        -webkit-transform: scale(0.09);
-        -ms-transform: scale(0.09);
-        -o-transform: scale(0.09);
-        transform: scale(0.09);
-        color: green; }
-    .headerView .leftMenu .register, .headerView .leftMenu .login {
-      color: white;
-      text-decoration: none;
-      padding: 5px;
-      -webkit-transition: color 0.5s;
-      -o-transition: color 0.5s;
-      transition: color 0.5s; }
-      .headerView .leftMenu .register:active, .headerView .leftMenu .login:active {
-        color: green; }
+    color: white;
+    font-size: 25px;
+    padding: 5px;
+    cursor: pointer;
+    -webkit-transition: transform 0.5s, color 0.5s;
+    -o-transition: transform 0.5s, color 0.5s;
+    transition: transform 0.5s, color 0.5s; }
+    .headerView .hamburgerMenu:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9);
+      color: green; }
   .headerView .logo {
-    position: relative;
-    float: left;
-    width: 33.33333%;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-    text-align: right;
-    padding: 0; }
+    float: right; }
     .headerView .logo .logoImage {
       width: 40px;
       height: 40px;
@@ -5909,6 +5879,7 @@ button.close {
   .sidebarView .settings {
     width: 300px;
     height: 100vh;
+    color: white;
     background-color: #455;
     padding: 20px;
     overflow-y: auto;
@@ -5918,16 +5889,26 @@ button.close {
     transform: translate(-200px, 0);
     -webkit-transition: transform 0.5s;
     -o-transition: transform 0.5s;
-    transition: transform 0.5s;
-    color: white; }
+    transition: transform 0.5s; }
     .sidebarView .settings .userInfo {
-      display: block;
-      text-decoration: none;
       color: white;
       border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      padding-bottom: 30px;
+      padding-bottom: 20px;
       padding-top: 10px;
-      margin-bottom: 15px; }
+      margin-bottom: 10px; }
+      .sidebarView .settings .userInfo .inputFile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1; }
+      .sidebarView .settings .userInfo .inputFile + label {
+        display: block;
+        margin: 10px auto;
+        cursor: pointer; }
+        .sidebarView .settings .userInfo .inputFile + label.isNotLoginLabel {
+          display: inline-block; }
       .sidebarView .settings .userInfo .avatar {
         width: 50px;
         height: 50px;
@@ -5946,6 +5927,15 @@ button.close {
         font-weight: bold; }
       .sidebarView .settings .userInfo .phone {
         font-size: 10px; }
+      .sidebarView .settings .userInfo .login, .sidebarView .settings .userInfo .register {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        -webkit-transition: color 0.5s;
+        -o-transition: color 0.5s;
+        transition: color 0.5s; }
+        .sidebarView .settings .userInfo .login:hover, .sidebarView .settings .userInfo .register:hover {
+          color: green; }
     .sidebarView .settings .options .optionsUL {
       list-style-type: none;
       padding: 0; }
@@ -6016,20 +6006,6 @@ button.close {
       -ms-transform: scale(0.9);
       -o-transform: scale(0.9);
       transform: scale(0.9); }
-  .loginSection .inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1; }
-  .loginSection .inputfile + label {
-    display: block;
-    margin: 10px auto;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: normal;
-    text-align: left; }
   .loginSection .submit {
     background-color: white;
     border: none;
@@ -6105,20 +6081,6 @@ button.close {
       -ms-transform: scale(0.9);
       -o-transform: scale(0.9);
       transform: scale(0.9); }
-  .registerSection .inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1; }
-  .registerSection .inputfile + label {
-    display: block;
-    margin: 10px auto;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: normal;
-    text-align: left; }
   .registerSection .submit {
     background-color: white;
     border: none;

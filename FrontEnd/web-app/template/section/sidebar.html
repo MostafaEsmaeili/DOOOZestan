@@ -1,9 +1,26 @@
 <section class="settings">
-    <a href="#" class="userInfo">
-        <img src="img/avatar.jpg" alt="" class="avatar">
+    <section class="userInfo">
+        <input type="file" name="file" id="file" class="inputFile" required/>
+        <label for="file" class="<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>">
+            <img src="<%- (userIsLogin === 'yes') ? 'img/avatar.jpg' : 'img/default-user.png' %>" alt="" class="avatar">
+        </label>
+        <% if(userIsLogin === 'yes'){ %>
         <div class="name">Ehsan Amiri</div>
         <div class="phone">+98-9371508772</div>
-    </a>
+        <% }else{ %>
+        <a href="#register" class="register">
+            <i class="icon fa fa-sign-in"></i>
+            Register
+        </a>
+        <a href="#login" class="login">
+            <i class="icon fa fa-sign-in"></i>
+            Login
+        </a>
+        <% } %>
+    </section>
+
+    <!-- *********************************************************************************************************** -->
+
     <nav class="options">
         <ul class="optionsUL">
             <li class="optionsLI">
@@ -42,6 +59,14 @@
                     DOOOZestan FAQ
                 </a>
             </li>
+            <% if(userIsLogin === 'yes'){ %>
+            <li class="optionsLI">
+                <a href="#game/1" class="optionsLink logout">
+                    <i class="icon fa fa-sign-out"></i>
+                    Log out
+                </a>
+            </li>
+            <% } %>
         </ul>
     </nav>
 </section>

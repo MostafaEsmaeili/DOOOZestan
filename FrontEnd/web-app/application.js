@@ -100,7 +100,7 @@
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(5),
-	    __webpack_require__(27),
+	    __webpack_require__(29),
 	]; (function ($, _, Backbone, Router, HeaderView) {
 	    this.router = new Router();
 	    Backbone.history.start({});
