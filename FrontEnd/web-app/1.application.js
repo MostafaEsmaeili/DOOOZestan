@@ -2072,21 +2072,22 @@ webpackJsonp([1],[
 	        userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
 	        passWordValue = (JS_Cookie.get('passWord')) ? JS_Cookie.get('passWord') : false,
 	        loginView     = Backbone.View.extend({
-	            tagName     : 'section',
-	            className   : 'loginView',
-	            events      : {
-	                'click .submit'    : 'submit',
+	            tagName         : 'section',
+	            className       : 'loginView',
+	            events          : {
+	                'click .eye'       : 'showHidePassword',
+	                'submit form'      : 'submit',
 	                'change .inputfile': 'avatarUpload'
 	            },
-	            template    : {
+	            template        : {
 	                page   : _.template(LoginPageTemplate),
 	                section: _.template(LoginSectionTemplate)
 	            },
-	            initialize  : function () {
+	            initialize      : function () {
 	                $(window).on("resize", this.updateCSS);
 	                this.render();
 	            },
-	            render      : function () {
+	            render          : function () {
 	                var _this = this;
 	                body.removeClass().addClass('login');
 	                this.$el.html(this.template.page);
@@ -2098,7 +2099,7 @@ webpackJsonp([1],[
 	                });
 	                return this;
 	            },
-	            updateCSS   : function () {
+	            updateCSS       : function () {
 	                if (window.innerHeight < 500) {
 	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
@@ -2106,7 +2107,7 @@ webpackJsonp([1],[
 	                    $('.loginSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
 	            },
-	            fillInputs  : function () {
+	            fillInputs      : function () {
 	                if (userNameValue) {
 	                    $('.userName').attr('placeholder', '').val(userNameValue);
 	                }
@@ -2114,7 +2115,7 @@ webpackJsonp([1],[
 	                    $('.passWord').attr('placeholder', '').val(passWordValue);
 	                }
 	            },
-	            submit      : function () {
+	            submit          : function () {
 	                JS_Cookie.set('userName', $('.userName').val());
 	                JS_Cookie.set('passWord', $('.passWord').val());
 	                JS_Cookie.set('userIsLogin', 'yes');
@@ -2122,7 +2123,7 @@ webpackJsonp([1],[
 	                var sidebarView = new SidebarView();
 	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
-	            avatarUpload: function (e) {
+	            avatarUpload    : function (e) {
 	                var thisEl = $(e.currentTarget),
 	                    regex  = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 	                if (regex.test(thisEl.val().toLowerCase())) {
@@ -2137,6 +2138,15 @@ webpackJsonp([1],[
 	                    }
 	                } else {
 	                    alert("Please upload a valid image file.");
+	                }
+	            },
+	            showHidePassword: function () {
+	                if ($('.password').attr('type') === 'password') {
+	                    $('.password').attr('type', 'text');
+	                    $('.eye').removeClass('fa-eye').addClass('fa-eye-slash');
+	                } else {
+	                    $('.password').attr('type', 'password');
+	                    $('.eye').removeClass('fa-eye-slash').addClass('fa-eye');
 	                }
 	            }
 	        });
@@ -2378,7 +2388,7 @@ webpackJsonp([1],[
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"holder\"></div>\n<section class=\"settings\">\n    <section class=\"userInfo\">\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\" class=\"<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>\">-->\n        <% if(userIsLogin === 'yes'){ %>\n        <a href=\"#profile\" class=\"user\">\n            <img src=\"img/new-user.png\" alt=\"\" class=\"userImage\">\n            <div class=\"name\">Ehsan Amiri</div>\n            <div class=\"phone\">+98-9371508772</div>\n        </a>\n        <% }else{ %>\n        <i class=\"fa fa-user-circle-o new-user\"></i>\n        <a href=\"#register\" class=\"register\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Register\n        </a>\n        <a href=\"#login\" class=\"login\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Login\n        </a>\n        <% } %>\n    </section>\n\n    <!-- *********************************************************************************************************** -->\n\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n            <% if(userIsLogin === 'yes'){ %>\n            <li class=\"optionsLI\">\n                <a href=\"#game/1\" class=\"optionsLink logout\">\n                    <i class=\"icon fa fa-sign-out\"></i>\n                    Log out\n                </a>\n            </li>\n            <% } %>\n        </ul>\n    </nav>\n</section>"
+	module.exports = "<div class=\"holder\"></div>\n<section class=\"settings\">\n    <section class=\"userInfo\">\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\" class=\"<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>\">-->\n        <% if(userIsLogin === 'yes'){ %>\n        <a href=\"#profile/1\" class=\"user\">\n            <img src=\"img/new-user.png\" alt=\"\" class=\"userImage\">\n            <div class=\"name\">Ehsan Amiri</div>\n            <div class=\"phone\">+98-9371508772</div>\n        </a>\n        <% }else{ %>\n        <i class=\"fa fa-user-circle-o new-user\"></i>\n        <a href=\"#register\" class=\"register\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Register\n        </a>\n        <a href=\"#login\" class=\"login\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Login\n        </a>\n        <% } %>\n    </section>\n\n    <!-- *********************************************************************************************************** -->\n\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n            <% if(userIsLogin === 'yes'){ %>\n            <li class=\"optionsLI\">\n                <a href=\"#game/1\" class=\"optionsLink logout\">\n                    <i class=\"icon fa fa-sign-out\"></i>\n                    Log out\n                </a>\n            </li>\n            <% } %>\n        </ul>\n    </nav>\n</section>"
 
 /***/ },
 /* 13 */
@@ -2390,7 +2400,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required />-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username or EMail\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required />-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 15 */
@@ -2407,21 +2417,22 @@ webpackJsonp([1],[
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarView, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
-	            tagName     : 'section',
-	            className   : 'registerView',
-	            events      : {
-	                'click .submit'    : 'submit',
-	                'change .inputFile': 'avatarUpload'
+	            tagName         : 'section',
+	            className       : 'registerView',
+	            events          : {
+	                'click .eye'       : 'showHidePassword',
+	                'submit form'      : 'submit',
+	                'change .inputFile': 'avatarUpload',
 	            },
-	            template    : {
+	            template        : {
 	                page   : _.template(RegisterPageTemplate),
 	                section: _.template(RegisterSectionTemplate)
 	            },
-	            initialize  : function () {
+	            initialize      : function () {
 	                this.render();
 	                $(window).on("resize", this.updateCSS);
 	            },
-	            render      : function () {
+	            render          : function () {
 	                var _this = this;
 	                body.removeClass().addClass('register');
 	                this.$el.html(this.template.page);
@@ -2430,7 +2441,7 @@ webpackJsonp([1],[
 	                });
 	                return this;
 	            },
-	            updateCSS   : function () {
+	            updateCSS       : function () {
 	                if (window.innerHeight < 500) {
 	                    $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
@@ -2438,15 +2449,15 @@ webpackJsonp([1],[
 	                    $('.registerSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
 	                }
 	            },
-	            submit      : function () {
-	                // JS_Cookie.set('userName', $('.userName').val());
-	                // JS_Cookie.set('passWord', $('.passWord').val());
+	            submit          : function () {
+	                JS_Cookie.set('userName', $('.userName').val());
+	                JS_Cookie.set('passWord', $('.passWord').val());
 	                JS_Cookie.set('userIsLogin', 'yes');
 	                $('.sidebarView').remove();
 	                var sidebarView = new SidebarView();
 	                Backbone.history.navigate('game/1', {trigger: true});
 	            },
-	            avatarUpload: function (e) {
+	            avatarUpload    : function (e) {
 	                var thisEl = $(e.currentTarget),
 	                    regex  = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 	                if (regex.test(thisEl.val().toLowerCase())) {
@@ -2461,6 +2472,15 @@ webpackJsonp([1],[
 	                    }
 	                } else {
 	                    alert("Please upload a valid image file.");
+	                }
+	            },
+	            showHidePassword: function () {
+	                if ($('.password').attr('type') === 'password') {
+	                    $('.password').attr('type', 'text');
+	                    $('.eye').removeClass('fa-eye').addClass('fa-eye-slash');
+	                } else {
+	                    $('.password').attr('type', 'password');
+	                    $('.eye').removeClass('fa-eye-slash').addClass('fa-eye');
 	                }
 	            }
 	        });
@@ -2477,7 +2497,7 @@ webpackJsonp([1],[
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"avatar\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"userName\" required autofocus>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"passWord\" required>\n        <br>\n        <input type=\"email\" placeholder=\"EMail or Phone\" class=\"email\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 18 */
@@ -2668,6 +2688,7 @@ webpackJsonp([1],[
 	                this.render();
 	            },
 	            render    : function () {
+	                body.removeClass().addClass('notFound');
 	                this.$el.html(this.template.page);
 	                body.prepend(this.$el);
 	                return this;
@@ -2705,8 +2726,7 @@ webpackJsonp([1],[
 	            tagName    : 'header',
 	            className  : 'headerView',
 	            events     : {
-	                'click .hamburgerMenu'       : 'showSidebar',
-	                'click .hamburgerMenu, .logo': 'vibrate'
+	                'click .hamburgerMenu': 'showSidebar',
 	            },
 	            template   : {
 	                page: _.template(HeaderSectionTemplate),
@@ -2723,13 +2743,6 @@ webpackJsonp([1],[
 	                $('.sidebarView').addClass('visible');
 	                body.addClass('noScroll');
 	            },
-	            vibrate    : function () {
-	                navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-	                if (navigator.vibrate) {
-	                    // vibration API supported
-	                    navigator.vibrate(5);
-	                }
-	            }
 	        });
 	    return headerView;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));

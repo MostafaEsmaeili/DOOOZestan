@@ -11,8 +11,7 @@ define([
             tagName    : 'header',
             className  : 'headerView',
             events     : {
-                'click .hamburgerMenu'       : 'showSidebar',
-                'click .hamburgerMenu, .logo': 'vibrate'
+                'click .hamburgerMenu': 'showSidebar',
             },
             template   : {
                 page: _.template(HeaderSectionTemplate),
@@ -29,13 +28,6 @@ define([
                 $('.sidebarView').addClass('visible');
                 body.addClass('noScroll');
             },
-            vibrate    : function () {
-                navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-                if (navigator.vibrate) {
-                    // vibration API supported
-                    navigator.vibrate(5);
-                }
-            }
         });
     return headerView;
 });

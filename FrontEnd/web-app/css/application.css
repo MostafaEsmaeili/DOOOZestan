@@ -5976,7 +5976,7 @@ button.close {
     .loginSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
-  .loginSection .avatar {
+  .loginSection .logo {
     width: 100px;
     height: 100px;
     border-top-right-radius: 50px;
@@ -5990,24 +5990,22 @@ button.close {
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
-  .loginSection .userName, .loginSection .passWord, .loginSection .inputfile + label {
+  .loginSection .username, .loginSection .password {
     background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px;
-    -webkit-transition: transform 0.5s;
-    -o-transition: transform 0.5s;
-    transition: transform 0.5s; }
+    width: 300px; }
     @media (max-width: 480px) {
-      .loginSection .userName, .loginSection .passWord, .loginSection .inputfile + label {
+      .loginSection .username, .loginSection .password {
         width: 90%; } }
-    .loginSection .userName:active, .loginSection .passWord:active, .loginSection .inputfile + label:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      -o-transform: scale(0.9);
-      transform: scale(0.9); }
+  .loginSection .eye {
+    margin-left: -37px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    cursor: pointer; }
   .loginSection .submit {
     background-color: white;
     border: none;
@@ -6051,7 +6049,7 @@ button.close {
     .registerSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
-  .registerSection .avatar {
+  .registerSection .logo {
     width: 100px;
     height: 100px;
     border-top-right-radius: 50px;
@@ -6065,24 +6063,22 @@ button.close {
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
-  .registerSection .userName, .registerSection .passWord, .registerSection .email, .registerSection .inputfile + label {
+  .registerSection .username, .registerSection .password, .registerSection .email {
     background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px;
-    -webkit-transition: transform 0.5s;
-    -o-transition: transform 0.5s;
-    transition: transform 0.5s; }
+    width: 300px; }
     @media (max-width: 480px) {
-      .registerSection .userName, .registerSection .passWord, .registerSection .email, .registerSection .inputfile + label {
+      .registerSection .username, .registerSection .password, .registerSection .email {
         width: 90%; } }
-    .registerSection .userName:active, .registerSection .passWord:active, .registerSection .email:active, .registerSection .inputfile + label:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      -o-transform: scale(0.9);
-      transform: scale(0.9); }
+  .registerSection .eye {
+    margin-left: -37px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    cursor: pointer; }
   .registerSection .submit {
     background-color: white;
     border: none;

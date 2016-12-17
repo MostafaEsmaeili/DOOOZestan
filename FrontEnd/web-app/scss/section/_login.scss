@@ -24,7 +24,7 @@
 
   //********************************************************************************************************************
 
-  .avatar {
+  .logo {
     width         : 100px;
     height        : 100px;
     @include border-radius(50px);
@@ -34,7 +34,7 @@
 
   //********************************************************************************************************************
 
-  .userName, .passWord, .inputfile + label {
+  .username, .password {
     background-color : $color-backgroundColor-glassy;
     border           : none;
     margin           : 10px 0;
@@ -44,10 +44,16 @@
     @media (max-width : $screen-xs-min) {
       width : 90%;
     }
-    @include transition(transform 0.5s);
-    &:active {
-      @include scale(0.9);
-    }
+  }
+
+  //********************************************************************************************************************
+
+  .eye {
+    margin-left : -37px;
+    font-size   : 17px;
+    color       : transparentize(white, 0.5);
+    padding     : 8px;
+    cursor      : pointer;
   }
 
   //********************************************************************************************************************
