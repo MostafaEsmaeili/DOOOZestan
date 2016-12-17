@@ -51,13 +51,16 @@ define([
                 return this;
             },
             select    : function (e) {
+                this.vibrate();
+                $('.action').removeClass('selected');
+                $(e.target).addClass('selected');
+            },
+            vibrate   : function () {
                 navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
                 if (navigator.vibrate) {
                     // vibration API supported
-                    navigator.vibrate(10);
+                    navigator.vibrate(5);
                 }
-                $('.action').removeClass('selected');
-                $(e.target).addClass('selected');
             }
         });
     return gameView;

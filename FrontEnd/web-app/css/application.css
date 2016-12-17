@@ -5824,17 +5824,17 @@ button.close {
     float: left;
     color: white;
     font-size: 25px;
-    padding: 5px;
+    padding: 10px 10px 10px 0;
+    margin-top: -2px;
     cursor: pointer;
-    -webkit-transition: transform 0.5s, color 0.5s;
-    -o-transition: transform 0.5s, color 0.5s;
-    transition: transform 0.5s, color 0.5s; }
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
     .headerView .hamburgerMenu:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      -o-transform: scale(0.9);
-      transform: scale(0.9);
-      color: green; }
+      -webkit-transform: scale(0.5);
+      -ms-transform: scale(0.5);
+      -o-transform: scale(0.5);
+      transform: scale(0.5); }
   .headerView .logo {
     float: right; }
     .headerView .logo .logoImage {
@@ -5849,12 +5849,19 @@ button.close {
       border-bottom-left-radius: 50%;
       border-top-left-radius: 50%;
       -webkit-box-shadow: 0 0 5px white;
-      box-shadow: 0 0 5px white; }
+      box-shadow: 0 0 5px white;
+      -webkit-transition: transform 0.5s, box-shadow 0.5s;
+      -o-transition: transform 0.5s, box-shadow 0.5s;
+      transition: transform 0.5s, box-shadow 0.5s; }
+      .headerView .logo .logoImage:active {
+        -webkit-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-box-shadow: 0 0 0 0;
+        box-shadow: 0 0 0 0; }
 
 .sidebarView {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 1;
   -webkit-transform: translate(0, -60px);
@@ -5876,6 +5883,12 @@ button.close {
       -ms-transform: translate(0, 0);
       -o-transform: translate(0, 0);
       transform: translate(0, 0); }
+  .sidebarView .holder {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 0; }
   .sidebarView .settings {
     width: 300px;
     height: 100vh;
@@ -5891,51 +5904,40 @@ button.close {
     -o-transition: transform 0.5s;
     transition: transform 0.5s; }
     .sidebarView .settings .userInfo {
-      color: white;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
       padding-top: 10px;
+      padding-bottom: 20px;
       margin-bottom: 10px; }
-      .sidebarView .settings .userInfo .inputFile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1; }
-      .sidebarView .settings .userInfo .inputFile + label {
+      .sidebarView .settings .userInfo .user {
         display: block;
-        margin: 10px auto;
-        cursor: pointer; }
-        .sidebarView .settings .userInfo .inputFile + label.isNotLoginLabel {
-          display: inline-block; }
-      .sidebarView .settings .userInfo .avatar {
-        width: 50px;
-        height: 50px;
-        border-top-right-radius: 50%;
-        border-top-left-radius: 50%;
-        border-bottom-right-radius: 50%;
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
-        border-bottom-left-radius: 50%;
-        border-bottom-left-radius: 50%;
-        border-top-left-radius: 50%;
-        -webkit-box-shadow: 0 0 5px white;
-        box-shadow: 0 0 5px white;
-        margin-bottom: 10px; }
-      .sidebarView .settings .userInfo .name {
-        font-weight: bold; }
-      .sidebarView .settings .userInfo .phone {
-        font-size: 10px; }
+        color: white;
+        text-decoration: none; }
+        .sidebarView .settings .userInfo .user .userImage {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 10px;
+          border-top-right-radius: 50%;
+          border-top-left-radius: 50%;
+          border-bottom-right-radius: 50%;
+          border-top-right-radius: 50%;
+          border-bottom-right-radius: 50%;
+          border-bottom-left-radius: 50%;
+          border-bottom-left-radius: 50%;
+          border-top-left-radius: 50%;
+          -webkit-box-shadow: 0 0 5px white;
+          box-shadow: 0 0 5px white; }
+        .sidebarView .settings .userInfo .user .name {
+          font-weight: bold; }
+        .sidebarView .settings .userInfo .user .phone {
+          font-size: 10px; }
       .sidebarView .settings .userInfo .login, .sidebarView .settings .userInfo .register {
         color: white;
         text-decoration: none;
-        padding: 10px;
-        -webkit-transition: color 0.5s;
-        -o-transition: color 0.5s;
-        transition: color 0.5s; }
-        .sidebarView .settings .userInfo .login:hover, .sidebarView .settings .userInfo .register:hover {
-          color: green; }
+        padding: 10px; }
+      .sidebarView .settings .userInfo .register {
+        margin-left: 10px; }
+      .sidebarView .settings .userInfo .new-user {
+        font-size: 40px; }
     .sidebarView .settings .options .optionsUL {
       list-style-type: none;
       padding: 0; }
@@ -6168,4 +6170,6 @@ body {
   min-height: 100vh; }
 
 .noScroll {
+  width: 100vw;
+  height: 100vh;
   overflow: hidden; }

@@ -1,13 +1,16 @@
+<div class="holder"></div>
 <section class="settings">
     <section class="userInfo">
-        <input type="file" name="file" id="file" class="inputFile" required/>
-        <label for="file" class="<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>">
-            <img src="<%- (userIsLogin === 'yes') ? 'img/avatar.jpg' : 'img/default-user.png' %>" alt="" class="avatar">
-        </label>
+        <!--<input type="file" name="file" id="file" class="inputFile" required/>-->
+        <!--<label for="file" class="<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>">-->
         <% if(userIsLogin === 'yes'){ %>
-        <div class="name">Ehsan Amiri</div>
-        <div class="phone">+98-9371508772</div>
+        <a href="#profile" class="user">
+            <img src="img/new-user.png" alt="" class="userImage">
+            <div class="name">Ehsan Amiri</div>
+            <div class="phone">+98-9371508772</div>
+        </a>
         <% }else{ %>
+        <i class="fa fa-user-circle-o new-user"></i>
         <a href="#register" class="register">
             <i class="icon fa fa-sign-in"></i>
             Register
