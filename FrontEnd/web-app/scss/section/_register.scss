@@ -14,17 +14,20 @@
 
   .welcome {
     color      : white;
-    font-size  : 15px;
+    font-size  : 13px;
     text-align : center;
     .dooozestan {
       font-size   : 30px;
       font-weight : bold;
     }
+    .slogan {
+      font-size : 17px;
+    }
   }
 
   //********************************************************************************************************************
 
-  .avatar {
+  .logo {
     width         : 100px;
     height        : 100px;
     @include border-radius(50px);
@@ -34,7 +37,7 @@
 
   //********************************************************************************************************************
 
-  .userName, .passWord, .email {
+  .username, .password, .email {
     background-color : $color-backgroundColor-glassy;
     border           : none;
     margin           : 10px 0;
@@ -44,11 +47,36 @@
     @media (max-width : $screen-xs-min) {
       width : 90%;
     }
-    @include transition(transform 0.5s);
-    &:active {
-      @include scale(0.9);
-    }
   }
+
+  //********************************************************************************************************************
+
+  .eye {
+    margin-left : -37px;
+    font-size   : 17px;
+    color       : transparentize(white, 0.5);
+    padding     : 8px;
+    cursor      : pointer;
+  }
+
+  //********************************************************************************************************************
+
+  //.inputFile {
+  //  width    : 0.1px;
+  //  height   : 0.1px;
+  //  opacity  : 0;
+  //  overflow : hidden;
+  //  position : absolute;
+  //  z-index  : -1;
+  //}
+  //.inputFile + label {
+  //  display     : block;
+  //  margin      : 10px auto;
+  //  cursor      : pointer;
+  //  color       : transparentize(white, 0.5);
+  //  font-weight : normal;
+  //  text-align  : left;
+  //}
 
   //********************************************************************************************************************
 

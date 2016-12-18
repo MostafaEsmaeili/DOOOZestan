@@ -10,6 +10,7 @@ module.exports = {
             'underscore': 'node_modules/underscore/underscore-min',
             'backbone'  : 'node_modules/backbone/backbone',
             'bootstrap' : 'node_modules/bootstrap/dist/js/bootstrap.min',
+            'js-cookie' : 'node_modules/js-cookie/src/js.cookie',
         }
     },
     module : {

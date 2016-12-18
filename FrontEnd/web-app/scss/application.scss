@@ -1,5 +1,6 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "variable";
+@import "zIndex";
 @import "mixin";
 @import "page/1page";
 @import "section/1section";
@@ -12,4 +13,10 @@ body {
   background-color : $color-backgroundColor;
   width            : 100%;
   min-height       : 100vh;
+}
+
+.noScroll {
+  width    : 100vw;
+  height   : 100vh;
+  overflow : hidden;
 }

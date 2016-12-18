@@ -251,6 +251,9 @@ paket-files/
 .idea/
 *.sln.iml
 
-FrontEnd/mobile-app/xox-app
-FrontEnd/mobile-app/xox-app.zip
+FrontEnd/mobile-app/DOOOZestan
+FrontEnd/mobile-app/DOOOZestan.zip
 FrontEnd/web-app/node_modules
+FrontEnd/web-app/1.application.js
+FrontEnd/web-app/application.js
+FrontEnd/web-app/css/application.css

@@ -5814,6 +5814,146 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+.headerView {
+  height: 60px;
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  background-color: #455; }
+  .headerView .hamburgerMenu {
+    float: left;
+    color: white;
+    font-size: 25px;
+    padding: 10px 10px 10px 0;
+    margin-top: -2px;
+    cursor: pointer;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    .headerView .hamburgerMenu:active {
+      -webkit-transform: scale(0.5);
+      -ms-transform: scale(0.5);
+      -o-transform: scale(0.5);
+      transform: scale(0.5); }
+  .headerView .logo {
+    float: right; }
+    .headerView .logo .logoImage {
+      width: 40px;
+      height: 40px;
+      border-top-right-radius: 50%;
+      border-top-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 50%;
+      -webkit-box-shadow: 0 0 5px white;
+      box-shadow: 0 0 5px white;
+      -webkit-transition: transform 0.5s, box-shadow 0.5s;
+      -o-transition: transform 0.5s, box-shadow 0.5s;
+      transition: transform 0.5s, box-shadow 0.5s; }
+      .headerView .logo .logoImage:active {
+        -webkit-transform: scale(0.5);
+        -ms-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        transform: scale(0.5);
+        -webkit-box-shadow: 0 0 0 0;
+        box-shadow: 0 0 0 0; }
+
+.sidebarView {
+  position: fixed;
+  z-index: 1;
+  -webkit-transform: translate(0, -60px);
+  -ms-transform: translate(0, -60px);
+  -o-transform: translate(0, -60px);
+  transform: translate(0, -60px);
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s; }
+  .sidebarView.visible {
+    visibility: visible;
+    opacity: 1;
+    filter: alpha(opacity=100); }
+    .sidebarView.visible .settings {
+      -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0); }
+  .sidebarView .holder {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 0; }
+  .sidebarView .settings {
+    width: 300px;
+    height: 100vh;
+    color: white;
+    background-color: #455;
+    padding: 20px;
+    overflow-y: auto;
+    -webkit-transform: translate(-200px, 0);
+    -ms-transform: translate(-200px, 0);
+    -o-transform: translate(-200px, 0);
+    transform: translate(-200px, 0);
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    .sidebarView .settings .userInfo {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-top: 10px;
+      padding-bottom: 20px;
+      margin-bottom: 10px; }
+      .sidebarView .settings .userInfo .user {
+        display: block;
+        color: white;
+        text-decoration: none; }
+        .sidebarView .settings .userInfo .user .userImage {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 10px;
+          border-top-right-radius: 50%;
+          border-top-left-radius: 50%;
+          border-bottom-right-radius: 50%;
+          border-top-right-radius: 50%;
+          border-bottom-right-radius: 50%;
+          border-bottom-left-radius: 50%;
+          border-bottom-left-radius: 50%;
+          border-top-left-radius: 50%;
+          -webkit-box-shadow: 0 0 5px white;
+          box-shadow: 0 0 5px white; }
+        .sidebarView .settings .userInfo .user .name {
+          font-weight: bold; }
+        .sidebarView .settings .userInfo .user .phone {
+          font-size: 10px; }
+      .sidebarView .settings .userInfo .login, .sidebarView .settings .userInfo .register {
+        color: white;
+        text-decoration: none;
+        padding: 10px; }
+      .sidebarView .settings .userInfo .register {
+        margin-left: 10px; }
+      .sidebarView .settings .userInfo .new-user {
+        font-size: 40px; }
+    .sidebarView .settings .options .optionsUL {
+      list-style-type: none;
+      padding: 0; }
+      .sidebarView .settings .options .optionsUL .optionsLI .optionsLink {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        -webkit-transition: background-color 0.5s;
+        -o-transition: background-color 0.5s;
+        transition: background-color 0.5s; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink:hover {
+          background-color: #344; }
+        .sidebarView .settings .options .optionsUL .optionsLI .optionsLink .icon {
+          width: 30px; }
+
 .loginSection {
   width: 100%;
   text-align: center; }
@@ -5831,12 +5971,14 @@ button.close {
     padding-bottom: 50px; }
   .loginSection .welcome {
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center; }
     .loginSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
-  .loginSection .avatar {
+    .loginSection .welcome .slogan {
+      font-size: 17px; }
+  .loginSection .logo {
     width: 100px;
     height: 100px;
     border-top-right-radius: 50px;
@@ -5850,24 +5992,22 @@ button.close {
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
-  .loginSection .userName, .loginSection .passWord {
-    background-color: #375;
+  .loginSection .username, .loginSection .password {
+    background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px;
-    -webkit-transition: transform 0.5s;
-    -o-transition: transform 0.5s;
-    transition: transform 0.5s; }
+    width: 300px; }
     @media (max-width: 480px) {
-      .loginSection .userName, .loginSection .passWord {
+      .loginSection .username, .loginSection .password {
         width: 90%; } }
-    .loginSection .userName:active, .loginSection .passWord:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      -o-transform: scale(0.9);
-      transform: scale(0.9); }
+  .loginSection .eye {
+    margin-left: -37px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    cursor: pointer; }
   .loginSection .submit {
     background-color: white;
     border: none;
@@ -5888,6 +6028,8 @@ button.close {
   .loginSection .register {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
+  .loginSection .forgotPassword {
+    color: rgba(255, 255, 255, 0.5); }
 
 .registerSection {
   width: 100%;
@@ -5906,12 +6048,14 @@ button.close {
     padding-bottom: 50px; }
   .registerSection .welcome {
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center; }
     .registerSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
-  .registerSection .avatar {
+    .registerSection .welcome .slogan {
+      font-size: 17px; }
+  .registerSection .logo {
     width: 100px;
     height: 100px;
     border-top-right-radius: 50px;
@@ -5925,24 +6069,22 @@ button.close {
     margin-bottom: 10px;
     -webkit-box-shadow: 0 0 5px white;
     box-shadow: 0 0 5px white; }
-  .registerSection .userName, .registerSection .passWord, .registerSection .email {
-    background-color: #375;
+  .registerSection .username, .registerSection .password, .registerSection .email {
+    background-color: #455;
     border: none;
     margin: 10px 0;
     padding: 10px;
     color: white;
-    width: 300px;
-    -webkit-transition: transform 0.5s;
-    -o-transition: transform 0.5s;
-    transition: transform 0.5s; }
+    width: 300px; }
     @media (max-width: 480px) {
-      .registerSection .userName, .registerSection .passWord, .registerSection .email {
+      .registerSection .username, .registerSection .password, .registerSection .email {
         width: 90%; } }
-    .registerSection .userName:active, .registerSection .passWord:active, .registerSection .email:active {
-      -webkit-transform: scale(0.9);
-      -ms-transform: scale(0.9);
-      -o-transform: scale(0.9);
-      transform: scale(0.9); }
+  .registerSection .eye {
+    margin-left: -37px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    cursor: pointer; }
   .registerSection .submit {
     background-color: white;
     border: none;
@@ -5963,6 +6105,72 @@ button.close {
   .registerSection .login {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
+
+.resetPasswordSection {
+  width: 100%;
+  text-align: center; }
+  .resetPasswordSection.largeHeight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .resetPasswordSection.smallHeight {
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px; }
+  .resetPasswordSection .welcome {
+    color: white;
+    font-size: 13px;
+    text-align: center; }
+    .resetPasswordSection .welcome .dooozestan {
+      font-size: 30px;
+      font-weight: bold; }
+    .resetPasswordSection .welcome .slogan {
+      font-size: 17px; }
+  .resetPasswordSection .logo {
+    width: 100px;
+    height: 100px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 5px white;
+    box-shadow: 0 0 5px white; }
+  .resetPasswordSection .email {
+    background-color: #455;
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    width: 300px; }
+    @media (max-width: 480px) {
+      .resetPasswordSection .email {
+        width: 90%; } }
+  .resetPasswordSection .submit {
+    background-color: white;
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
+      .resetPasswordSection .submit {
+        width: 90%; } }
+    .resetPasswordSection .submit:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
 
 .playground {
   position: absolute;
@@ -6015,16 +6223,21 @@ button.close {
       -o-transition: background-color 0.5s, transform 0.5s;
       transition: background-color 0.5s, transform 0.5s; }
       .playground .actionHolder .action:hover {
-        background-color: #375; }
+        background-color: #455; }
       .playground .actionHolder .action:active {
         -webkit-transform: scale(0.7);
         -ms-transform: scale(0.7);
         -o-transform: scale(0.7);
         transform: scale(0.7); }
       .playground .actionHolder .action.selected {
-        background-color: #375; }
+        background-color: #455; }
 
 body {
-  background-color: #264;
+  background-color: #344;
   width: 100%;
   min-height: 100vh; }
+
+.noScroll {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; }

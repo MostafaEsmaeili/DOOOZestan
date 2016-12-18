@@ -3,11 +3,11 @@ define([
     'underscore',
     'backbone',
     '../../template/page/profile.html',
-    '../../template/section/profile.html',
+    '../../template/section/profile.html'
 ], function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
     var body        = $('body'),
         profileView = Backbone.View.extend({
-            tagName   : 'main',
+            tagName   : 'section',
             className : 'profileView',
             template  : {
                 page   : _.template(ProfilePageTemplate),

@@ -1,2 +1,39 @@
 .headerView {
+  height           : 60px;
+  width            : 100%;
+  padding          : 10px;
+  margin           : 0;
+  background-color : $color-backgroundColor-glassy;
+
+  //********************************************************************************************************************
+
+  .hamburgerMenu {
+    float      : left;
+    color      : white;
+    font-size  : 25px;
+    padding    : 10px 10px 10px 0;
+    margin-top : -2px;
+    cursor     : pointer;
+    @include transition(transform 0.5s);
+    &:active {
+      @include scale(0.5);
+    }
+  }
+
+  //********************************************************************************************************************
+
+  .logo {
+    float : right;
+    .logoImage {
+      width  : 40px;
+      height : 40px;
+      @include border-radius(50%);
+      @include box-shadow(0 0 5px white);
+      @include transition(transform 0.5s, box-shadow 0.5s);
+      &:active {
+        @include scale(0.5);
+        @include box-shadow(0 0 0 0);
+      }
+    }
+  }
 }

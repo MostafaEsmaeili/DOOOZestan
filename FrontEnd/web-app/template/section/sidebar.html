@@ -1,0 +1,75 @@
+<div class="holder"></div>
+<section class="settings">
+    <section class="userInfo">
+        <!--<input type="file" name="file" id="file" class="inputFile" required/>-->
+        <!--<label for="file" class="<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>">-->
+        <% if(userIsLogin === 'yes'){ %>
+        <a href="#profile/1" class="user">
+            <img src="img/new-user.png" alt="" class="userImage">
+            <div class="name">Ehsan Amiri</div>
+            <div class="phone">+98-9371508772</div>
+        </a>
+        <% }else{ %>
+        <i class="fa fa-user-circle-o new-user"></i>
+        <a href="#register" class="register">
+            <i class="icon fa fa-sign-in"></i>
+            Register
+        </a>
+        <a href="#login" class="login">
+            <i class="icon fa fa-sign-in"></i>
+            Login
+        </a>
+        <% } %>
+    </section>
+
+    <!-- *********************************************************************************************************** -->
+
+    <nav class="options">
+        <ul class="optionsUL">
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-gamepad"></i>
+                    New Game
+                </a>
+            </li>
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-comments"></i>
+                    New Chat
+                </a>
+            </li>
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-users"></i>
+                    Contacts
+                </a>
+            </li>
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-user-plus"></i>
+                    Invite Friends
+                </a>
+            </li>
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-cog"></i>
+                    Settings
+                </a>
+            </li>
+            <li class="optionsLI">
+                <a href="#" class="optionsLink">
+                    <i class="icon fa fa-coffee"></i>
+                    About
+                </a>
+            </li>
+            <% if(userIsLogin === 'yes'){ %>
+            <li class="optionsLI">
+                <a href="#game/1" class="optionsLink logout">
+                    <i class="icon fa fa-sign-out"></i>
+                    Log out
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </nav>
+</section>

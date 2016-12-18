@@ -1,0 +1,122 @@
+.sidebarView {
+  position   : fixed;
+  z-index    : $zIndex-sidebar;
+  @include translate(0, -60px);
+  @include opacity(0);
+  visibility : hidden;
+  @include transition(opacity 0.5s);
+  &.visible {
+    visibility : visible;
+    @include opacity(1);
+    .settings {
+      @include translate(0, 0);
+    }
+  }
+  .holder {
+    width            : 100vw;
+    height           : 100vh;
+    background-color : transparentize(black, 0.5);
+    position         : fixed;
+    z-index          : $zIndex-sidebar - 1;
+  }
+
+  //********************************************************************************************************************
+
+  .settings {
+    width            : 300px;
+    height           : 100vh;
+    color            : white;
+    background-color : $color-backgroundColor-glassy;
+    padding          : 20px;
+    overflow-y       : auto;
+    @include translate(-200px, 0);
+    @include transition(transform 0.5s);
+
+    //******************************************************************************************************************
+
+    .userInfo {
+      border-bottom  : 1px solid transparentize(white, 0.75);
+      padding-top    : 10px;
+      padding-bottom : 20px;
+      margin-bottom  : 10px;
+
+      //****************************************************************************************************************
+
+      //.inputFile {
+      //  width    : 0.1px;
+      //  height   : 0.1px;
+      //  opacity  : 0;
+      //  overflow : hidden;
+      //  position : absolute;
+      //  z-index  : -1;
+      //}
+      //.inputFile + label {
+      //  display : block;
+      //  margin  : 10px auto;
+      //  cursor  : pointer;
+      //  &.isNotLoginLabel {
+      //    display : inline-block;
+      //  }
+      //}
+
+      //****************************************************************************************************************
+
+      .user {
+        display         : block;
+        color           : white;
+        text-decoration : none;
+        .userImage {
+          width         : 50px;
+          height        : 50px;
+          margin-bottom : 10px;
+          @include border-radius(50%);
+          @include box-shadow(0 0 5px white);
+        }
+        .name {
+          font-weight : bold;
+        }
+        .phone {
+          font-size : 10px;
+        }
+      }
+
+      //****************************************************************************************************************
+
+      .login, .register {
+        color           : white;
+        text-decoration : none;
+        padding         : 10px;
+      }
+      .register {
+        margin-left : 10px;
+      }
+      .new-user {
+        font-size : 40px;
+      }
+    }
+
+    //******************************************************************************************************************
+
+    .options {
+      .optionsUL {
+        list-style-type : none;
+        padding         : 0;
+        .optionsLI {
+          .optionsLink {
+            color           : white;
+            text-decoration : none;
+            display         : block;
+            padding         : 10px;
+            @include transition(background-color 0.5s);
+            &:hover {
+              background-color : $color-backgroundColor;
+            }
+            .icon {
+              width : 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
