@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Framework.Utility;
@@ -24,7 +23,7 @@ namespace Doozestan.UserManagement.Helper
                 mail.Body = message.Body;
                 mail.IsBodyHtml = true;
                 smtpServer.Port = ConfigurationManager.AppSettings["IdentityMailPort"].SafeInt();
-                smtpServer.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["NetworkCredentialUsername"].SafeString(), ConfigurationManager.AppSettings["NetworkCredentialPassword"].SafeString());
+                smtpServer.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["NetworkCredentialUsername"].SafeString(), ConfigurationManager.AppSettings["NetworkCredentialPassword"].SafeString());
                 smtpServer.EnableSsl = true;
                 //smtpServer.UseDefaultCredentials = true;
                 smtpServer.Send(mail);

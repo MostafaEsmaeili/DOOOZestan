@@ -1,4 +1,6 @@
 
+using System;
+
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 namespace Doozestan.Domain
@@ -22,6 +24,9 @@ namespace Doozestan.Domain
         public System.DateTime? CreateDate { get; set; }
         public string Discriminator { get; set; }
         public bool? IsActive { get; set; }
+        public  bool IsAdmin { get; set; }
+        public  bool IsCustomizedAccess { get; set; }
+        public  int? Status { get; set; }
 
         public virtual System.Collections.Generic.ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual System.Collections.Generic.ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }

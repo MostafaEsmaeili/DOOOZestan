@@ -7,11 +7,11 @@ namespace Doozestan.Domain
 
     public class DoozestanDbContext :Framework.DataAccess.DataContext.DataContext, IDoozestanDbContext
     {
-        public System.Data.Entity.DbSet<AspNetRole> AspNetRoles { get; set; }
-        public System.Data.Entity.DbSet<AspNetUser> AspNetUsers { get; set; }
-        public System.Data.Entity.DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public System.Data.Entity.DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
+        //public System.Data.Entity.DbSet<AspNetRole> AspNetRoles { get; set; }
+        //public System.Data.Entity.DbSet<AspNetUser> AspNetUsers { get; set; }
+        //public System.Data.Entity.DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        //public System.Data.Entity.DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        //public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public System.Data.Entity.DbSet<Game> Games { get; set; }
         public System.Data.Entity.DbSet<Tournament> Tournaments { get; set; }
 
@@ -38,22 +38,22 @@ namespace Doozestan.Domain
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new AspNetRoleMap());
-            modelBuilder.Configurations.Add(new AspNetUserMap());
-            modelBuilder.Configurations.Add(new AspNetUserClaimMap());
-            modelBuilder.Configurations.Add(new AspNetUserLoginMap());
-            modelBuilder.Configurations.Add(new AspNetUserRoleMap());
+            //modelBuilder.Configurations.Add(new AspNetRoleMap());
+            //modelBuilder.Configurations.Add(new AspNetUserMap());
+            //modelBuilder.Configurations.Add(new AspNetUserClaimMap());
+            //modelBuilder.Configurations.Add(new AspNetUserLoginMap());
+            //modelBuilder.Configurations.Add(new AspNetUserRoleMap());
             modelBuilder.Configurations.Add(new GameMap());
             modelBuilder.Configurations.Add(new TournamentMap());
         }
 
         public static System.Data.Entity.DbModelBuilder CreateModel(System.Data.Entity.DbModelBuilder modelBuilder, string schema)
         {
-            modelBuilder.Configurations.Add(new AspNetRoleMap(schema));
-            modelBuilder.Configurations.Add(new AspNetUserMap(schema));
-            modelBuilder.Configurations.Add(new AspNetUserClaimMap(schema));
-            modelBuilder.Configurations.Add(new AspNetUserLoginMap(schema));
-            modelBuilder.Configurations.Add(new AspNetUserRoleMap(schema));
+            //modelBuilder.Configurations.Add(new AspNetRoleMap(schema));
+            //modelBuilder.Configurations.Add(new AspNetUserMap(schema));
+            //modelBuilder.Configurations.Add(new AspNetUserClaimMap(schema));
+            //modelBuilder.Configurations.Add(new AspNetUserLoginMap(schema));
+            //modelBuilder.Configurations.Add(new AspNetUserRoleMap(schema));
             modelBuilder.Configurations.Add(new GameMap(schema));
             modelBuilder.Configurations.Add(new TournamentMap(schema));
             return modelBuilder;

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using System.Web.Http.Results;
+using System.Web.Mvc;
+using Doozestan.Domain;
 using Doozestan.UserManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -17,11 +20,11 @@ using Microsoft.Owin.Security.OAuth;
 using Doozestan.WebApi.Models;
 using Doozestan.WebApi.Providers;
 using Doozestan.WebApi.Results;
-using ApplicationUser = Doozestan.WebApi.Models.ApplicationUser;
 
 namespace Doozestan.WebApi.Controllers
 {
-    [RoutePrefix("api/Account")]
+    [System.Web.Http.Authorize]
+    [System.Web.Http.RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -29,6 +32,7 @@ namespace Doozestan.WebApi.Controllers
 
         public AccountController()
         {
+            
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -42,7 +46,7 @@ namespace Doozestan.WebApi.Controllers
         {
             get
             {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
@@ -50,334 +54,231 @@ namespace Doozestan.WebApi.Controllers
             }
         }
 
-        [Route("GetAllUsers")]
+
+        [System.Web.Http.Route("GetAllUsers")]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult GetAllUsers()
         {
-            return Json(AuthenticationManager.AuthenticationProvider.GetApplicationUsers());
+            var users = AuthenticationManager.AuthenticationProvider.GetApplicationUsers();
+            return Json(users);
         }
-       public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        //// GET api/Account/UserInfo
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        //[Route("UserInfo")]
-        //public UserInfoViewModel GetUserInfo()
-        //{
-        //    ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-        //    return new UserInfoViewModel
-        //    {
-        //        Email = User.Identity.GetUserName(),
-        //        HasRegistered = externalLogin == null,
-        //        LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
-        //    };
-        //}
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [System.Web.Http.Route("UserInfo")]
+        [System.Web.Http.HttpPost]
 
-        //// POST api/Account/Logout
-        //[Route("Logout")]
-        //public IHttpActionResult Logout()
-        //{
-        //    Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-        //    return Ok();
-        //}
+        public UserInfoViewModel GetUserInfo()
+        {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var user = AuthenticationManager.AuthenticationProvider.UserManager.FindByName(User.Identity.Name);
+            return new UserInfoViewModel
+            {
+                Email = user.Email,
 
-        //// GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        //[Route("ManageInfo")]
-        //public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
-        //{
-        //    IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                HasRegistered = externalLogin == null,
+                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
 
-        //    if (user == null)
-        //    {
-        //        return null;
-        //    }
+            };
+        }
 
-        //    List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
 
-        //    foreach (IdentityUserLogin linkedAccount in user.Logins)
-        //    {
-        //        logins.Add(new UserLoginInfoViewModel
-        //        {
-        //            LoginProvider = linkedAccount.LoginProvider,
-        //            ProviderKey = linkedAccount.ProviderKey
-        //        });
-        //    }
+        [System.Web.Http.Route("Logout")]
+        [System.Web.Http.HttpPost]
 
-        //    if (user.PasswordHash != null)
-        //    {
-        //        logins.Add(new UserLoginInfoViewModel
-        //        {
-        //            LoginProvider = LocalLoginProvider,
-        //            ProviderKey = user.UserName,
-        //        });
-        //    }
+        public IHttpActionResult Logout()
+        {
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            return Ok();
+        }
 
-        //    return new ManageInfoViewModel
-        //    {
-        //        LocalLoginProvider = LocalLoginProvider,
-        //        Email = user.UserName,
-        //        Logins = logins,
-        //        ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
-        //    };
-        //}
+        [System.Web.Http.Route("ChangePassword")]
+        [System.Web.Http.HttpPost]
 
-        //// POST api/Account/ChangePassword
-        //[Route("ChangePassword")]
-        //public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-        //        model.NewPassword);
-            
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                model.NewPassword);
 
-        //    return Ok();
-        //}
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
-        //// POST api/Account/SetPassword
-        //[Route("SetPassword")]
-        //public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            return Ok();
+        }
 
-        //    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+        [System.Web.Http.Route("SetPassword")]
+        [System.Web.Http.HttpPost]
 
-        //    return Ok();
-        //}
+        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //// POST api/Account/AddExternalLogin
-        //[Route("AddExternalLogin")]
-        //public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
-        //    Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
-        //    AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            return Ok();
+        }
 
-        //    if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-        //        && ticket.Properties.ExpiresUtc.HasValue
-        //        && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
-        //    {
-        //        return BadRequest("External login failure.");
-        //    }
 
-        //    ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+        [System.Web.Http.Route("AddExternalLogin")]
+        [System.Web.Http.HttpPost]
 
-        //    if (externalData == null)
-        //    {
-        //        return BadRequest("The external login is already associated with an account.");
-        //    }
+        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
-        //        new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
+            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
-        //    return Ok();
-        //}
+            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
+                && ticket.Properties.ExpiresUtc.HasValue
+                && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
+            {
+                return BadRequest("External login failure.");
+            }
 
-        //// POST api/Account/RemoveLogin
-        //[Route("RemoveLogin")]
-        //public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
-        //    IdentityResult result;
+            if (externalData == null)
+            {
+                return BadRequest("The external login is already associated with an account.");
+            }
 
-        //    if (model.LoginProvider == LocalLoginProvider)
-        //    {
-        //        result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
-        //    }
-        //    else
-        //    {
-        //        result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-        //            new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-        //    }
+            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+                new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
-        //// GET api/Account/ExternalLogin
-        //[OverrideAuthentication]
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        //[AllowAnonymous]
-        //[Route("ExternalLogin", Name = "ExternalLogin")]
-        //public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
-        //{
-        //    if (error != null)
-        //    {
-        //        return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
-        //    }
 
-        //    if (!User.Identity.IsAuthenticated)
-        //    {
-        //        return new ChallengeResult(provider, this);
-        //    }
+        [System.Web.Http.OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ExternalLogin", Name = "ExternalLogin")]
+        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+        {
+            if (error != null)
+            {
+                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+            }
 
-        //    ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return new ChallengeResult(provider, this);
+            }
 
-        //    if (externalLogin == null)
-        //    {
-        //        return InternalServerError();
-        //    }
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-        //    if (externalLogin.LoginProvider != provider)
-        //    {
-        //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-        //        return new ChallengeResult(provider, this);
-        //    }
+            if (externalLogin == null)
+            {
+                return InternalServerError();
+            }
 
-        //    ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-        //        externalLogin.ProviderKey));
+            if (externalLogin.LoginProvider != provider)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(provider, this);
+            }
 
-        //    bool hasRegistered = user != null;
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                externalLogin.ProviderKey));
 
-        //    if (hasRegistered)
-        //    {
-        //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-        //         ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-        //            OAuthDefaults.AuthenticationType);
-        //        ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
-        //            CookieAuthenticationDefaults.AuthenticationType);
+            bool hasRegistered = user != null;
 
-        //        AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-        //        Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
-        //    }
-        //    else
-        //    {
-        //        IEnumerable<Claim> claims = externalLogin.GetClaims();
-        //        ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-        //        Authentication.SignIn(identity);
-        //    }
+            if (hasRegistered)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-        //    return Ok();
-        //}
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
+                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                    CookieAuthenticationDefaults.AuthenticationType);
 
-        //// GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
-        //[AllowAnonymous]
-        //[Route("ExternalLogins")]
-        //public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
-        //{
-        //    IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-        //    List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+            }
+            else
+            {
+                IEnumerable<Claim> claims = externalLogin.GetClaims();
+                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                Authentication.SignIn(identity);
+            }
 
-        //    string state;
+            return Ok();
+        }
 
-        //    if (generateState)
-        //    {
-        //        const int strengthInBits = 256;
-        //        state = RandomOAuthStateGenerator.Generate(strengthInBits);
-        //    }
-        //    else
-        //    {
-        //        state = null;
-        //    }
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("Register")]
+      
+        public IHttpActionResult Register(RegisterBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    foreach (AuthenticationDescription description in descriptions)
-        //    {
-        //        ExternalLoginViewModel login = new ExternalLoginViewModel
-        //        {
-        //            Name = description.Caption,
-        //            Url = Url.Route("ExternalLogin", new
-        //            {
-        //                provider = description.AuthenticationType,
-        //                response_type = "token",
-        //                client_id = Startup.PublicClientId,
-        //                redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-        //                state = state
-        //            }),
-        //            State = state
-        //        };
-        //        logins.Add(login);
-        //    }
+            AutoMapper.Mapper.CreateMap<RegisterBindingModel, Domain.ApplicationUser>()
+               .ForMember(dest => dest.CreateDate,
+                   opt => opt.MapFrom(src => DateTime.Now))
+               .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ForMember(dest => dest.PasswordHash,
+                   opt =>
+                       opt.Ignore())
+               .ForMember(x => x.EmailConfirmed, y => y.UseValue(true))
+               .ForMember(x => x.PhoneNumberConfirmed, y => y.UseValue(true))
+               .ForMember(x => x.Status, y => y.UseValue(1))
+               .ForMember(x => x.LockoutEnabled, y => y.UseValue(false));
 
-        //    return logins;
-        //}
 
-        //// POST api/Account/Register
-        //[AllowAnonymous]
-        //[Route("Register")]
-        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            var res = AutoMapper.Mapper.Map<RegisterBindingModel, ApplicationUser>(model);
 
-        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            res.LockoutEnabled = false;
 
-        //    IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            AuthenticationManager.AuthenticationProvider.UserManager.Create(res, model.Password);
+            _userManager.Create(res, model.Password);
+            var addedUser = AuthenticationManager.AuthenticationProvider.UserManager.FindByName(model.UserName);
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            //if (model. != null)
+            //    AuthenticationManager.AuthenticationProvider.UserManager.AddToRoles(addedUser.Id,
+            //        model.RolesCodeList.ToArray());
+            addedUser.LockoutEnabled = false;
+            AuthenticationManager.AuthenticationProvider.UserManager.Update(addedUser);
 
-        //    return Ok();
-        //}
+            //IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-        //// POST api/Account/RegisterExternal
-        //[OverrideAuthentication]
-        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        //[Route("RegisterExternal")]
-        //public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+            //if (!result.Succeeded)
+            //{
+            //    return GetErrorResult(result);
+            //}
 
-        //    var info = await Authentication.GetExternalLoginInfoAsync();
-        //    if (info == null)
-        //    {
-        //        return InternalServerError();
-        //    }
+            return Ok();
+        }
 
-        //    var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
-
-        //    IdentityResult result = await UserManager.CreateAsync(user);
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
-
-        //    result = await UserManager.AddLoginAsync(user.Id, info.Login);
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result); 
-        //    }
-        //    return Ok();
-        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -493,6 +394,35 @@ namespace Doozestan.WebApi.Controllers
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
+        }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("CheckEmail")]
+
+        public JsonResult<bool> CheckEmail(string email)
+        {
+
+            var user = AuthenticationManager.AuthenticationProvider.UserManager.FindByEmail(email);
+
+
+            return Json(user == null);
+
+        }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("CheckIfUserNameExist")]
+
+        public JsonResult<bool> CheckIfUserNameExist(string UserName)
+        {
+
+            var user = AuthenticationManager.AuthenticationProvider.UserManager.FindByName(UserName);
+            return Json(user == null);
+        }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("CheckPasswordValidation")]
+
+        public JsonResult<bool> CheckPasswordValidation(string Password, string CurrentPassword)
+        {
+            return Json(AuthenticationManager.AuthenticationProvider.UserManager.PasswordValidator.ValidateAsync(Password).Result.Succeeded);
         }
 
         #endregion

@@ -1,7 +1,4 @@
-﻿
-
-using Doozestan.Domain;
-using Doozestan.Domain.User;
+﻿using Doozestan.Domain.User;
 
 namespace Doozestan.UserManagement.Mapper
 {
@@ -16,7 +13,7 @@ namespace Doozestan.UserManagement.Mapper
                 DisplayName = applicationUserDto.DisplayName,
                 Email = applicationUserDto.Email,
                 EmailConfirmed = applicationUserDto.EmailConfirmed,
-               // Status = applicationUserDto.Status,
+                IsActive = applicationUserDto.IsActive,
                 LockoutEnabled = applicationUserDto.LockoutEnabled,
                 LockoutEndDateUtc = applicationUserDto.LockoutEndDateUtc,
                 PasswordHash = applicationUserDto.PasswordHash,
@@ -24,10 +21,7 @@ namespace Doozestan.UserManagement.Mapper
                 PhoneNumberConfirmed = applicationUserDto.PhoneNumberConfirmed,
                 SecurityStamp = applicationUserDto.SecurityStamp,
                 TwoFactorEnabled = applicationUserDto.TwoFactorEnabled,
-                UserName = applicationUserDto.UserName,
-             //  IsAdmin = applicationUserDto.IsAdmin,
-              //  IsCustomizedAccess = applicationUserDto.IsCustomizedAccess
-
+                UserName = applicationUserDto.UserName
             };
             return applicationUser;
         }
@@ -42,7 +36,7 @@ namespace Doozestan.UserManagement.Mapper
                 DisplayName = applicationUser.DisplayName,
                 Email = applicationUser.Email,
                 EmailConfirmed = applicationUser.EmailConfirmed,
-            //    Status = applicationUser.Status,
+                IsActive = applicationUser.IsActive,
                 LockoutEnabled = applicationUser.LockoutEnabled,
                 LockoutEndDateUtc = applicationUser.LockoutEndDateUtc,
                 PasswordHash = applicationUser.PasswordHash,
@@ -50,10 +44,7 @@ namespace Doozestan.UserManagement.Mapper
                 PhoneNumberConfirmed = applicationUser.PhoneNumberConfirmed,
                 SecurityStamp = applicationUser.SecurityStamp,
                 TwoFactorEnabled = applicationUser.TwoFactorEnabled,
-                UserName = applicationUser.UserName,
-           //     IsAdmin = applicationUser.IsAdmin,
-             //   IsCustomizedAccess = applicationUser.IsCustomizedAccess
-                
+                UserName = applicationUser.UserName
             };
             return applicationUserDto;
         }

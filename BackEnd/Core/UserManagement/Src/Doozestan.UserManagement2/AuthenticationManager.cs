@@ -2,11 +2,13 @@
 {
     public static class AuthenticationManager
     {
-        public static AspAuthenticationProvider AuthenticationProvider { get; set; }
+        public static AuthenticationProvider AuthenticationProvider { get; set; }
 
         static AuthenticationManager()
         {
-            AuthenticationProvider = new AspAuthenticationProvider();
+            AuthenticationProvider = new AuthenticationProvider();
         }
+
+    
     }
 }
