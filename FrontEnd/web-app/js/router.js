@@ -5,45 +5,51 @@ define([
     'view/home',
     'view/login',
     'view/register',
+    'view/resetPassword',
     'view/profile',
     'view/game',
-    'view/notFound',
-], function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
+    'view/notFound'
+], function ($, _, Backbone, HomeView, LoginView, RegisterView, ResetPasswordView, ProfileView, GameView, NotFoundView) {
     var body      = $('body'),
         main      = $('main'),
         appRouter = Backbone.Router.extend({
-            initialize: function (options) {
+            initialize   : function (options) {
             },
-            routes    : {
-                ''           : 'home',
-                // ''           : 'login',
-                'login'      : 'login',
-                'register'   : 'register',
-                'profile/:id': 'profile',
-                'game/:id'   : 'game',
-                '*path'      : 'notFound',
+            routes       : {
+                // ''           : 'home',
+                ''             : 'game',
+                'login'        : 'login',
+                'register'     : 'register',
+                'resetPassword': 'resetPassword',
+                'profile/:id'  : 'profile',
+                'game/:id'     : 'game',
+                '*path'        : 'notFound'
             },
-            home      : function () {
+            home         : function () {
                 var homeView = new HomeView();
                 main.html(homeView.$el);
             },
-            login     : function () {
+            login        : function () {
                 var loginView = new LoginView();
                 main.html(loginView.$el);
             },
-            register  : function () {
+            register     : function () {
                 var registerView = new RegisterView();
                 main.html(registerView.$el);
             },
-            profile   : function (id) {
+            resetPassword: function () {
+                var resetPasswordView = new ResetPasswordView();
+                main.html(resetPasswordView.$el);
+            },
+            profile      : function (id) {
                 var profileView = new ProfileView();
                 main.html(profileView.$el);
             },
-            game      : function (id) {
+            game         : function (id) {
                 var gameView = new GameView(id);
                 main.html(gameView.$el);
             },
-            notFound  : function (path) {
+            notFound     : function (path) {
                 var notFoundView = new NotFoundView(path);
                 main.html(notFoundView.$el);
             }

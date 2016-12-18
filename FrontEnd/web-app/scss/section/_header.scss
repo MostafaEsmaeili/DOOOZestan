@@ -8,15 +8,15 @@
   //********************************************************************************************************************
 
   .hamburgerMenu {
-    float     : left;
-    color     : white;
-    font-size : 25px;
-    padding   : 5px;
-    cursor    : pointer;
-    @include transition(transform 0.5s, color 0.5s);
+    float      : left;
+    color      : white;
+    font-size  : 25px;
+    padding    : 10px 10px 10px 0;
+    margin-top : -2px;
+    cursor     : pointer;
+    @include transition(transform 0.5s);
     &:active {
-      @include scale(0.9);
-      color : green;
+      @include scale(0.5);
     }
   }
 
@@ -29,6 +29,11 @@
       height : 40px;
       @include border-radius(50%);
       @include box-shadow(0 0 5px white);
+      @include transition(transform 0.5s, box-shadow 0.5s);
+      &:active {
+        @include scale(0.5);
+        @include box-shadow(0 0 0 0);
+      }
     }
   }
 }

@@ -17,6 +17,7 @@ define([
                 this.render();
             },
             render    : function () {
+                body.removeClass().addClass('notFound');
                 this.$el.html(this.template.page);
                 body.prepend(this.$el);
                 return this;

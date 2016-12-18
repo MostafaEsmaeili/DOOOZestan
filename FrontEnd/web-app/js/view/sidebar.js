@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'js-cookie',
-    '../../template/section/sidebar.html',
+    '../../template/section/sidebar.html'
 ], function ($, _, Backbone, JS_Cookie, SidebarSectionTemplate) {
     var body        = $('body'),
         main        = $('main'),
@@ -11,25 +11,24 @@ define([
             tagName     : 'aside',
             className   : 'sidebarView',
             events      : {
-                'click .settings'                  : 'preventClick',
-                'change .inputFile'                : 'avatarUpload',
-                'click  .login, .register, .logout': 'closeSidebar',
-                'click  .logout'                   : 'logout',
+                // 'change .inputFile'                : 'avatarUpload',
+                'click  .logout': 'logout'
             },
             template    : {
-                page: _.template(SidebarSectionTemplate),
+                page: _.template(SidebarSectionTemplate)
             },
             initialize  : function () {
                 this.render();
             },
             render      : function () {
+                var _this = this;
                 this.$el.html(this.template.page({
                     userIsLogin: JS_Cookie.get('userIsLogin')
                 }));
                 $('.sidebarView').remove();
                 this.$el.insertBefore(main);
-                this.$el.on('click', this.preventClick);
-                this.$el.on('click', this.closeSidebar);
+                $('a', this.$el).on('click', _this.closeSidebar);
+                $('.holder', this.$el).on('click', _this.closeSidebar);
                 return this;
             },
             closeSidebar: function () {

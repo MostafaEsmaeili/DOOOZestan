@@ -11,7 +11,7 @@ define([
             tagName    : 'header',
             className  : 'headerView',
             events     : {
-                'click .hamburgerMenu': 'showSidebar'
+                'click .hamburgerMenu': 'showSidebar',
             },
             template   : {
                 page: _.template(HeaderSectionTemplate),

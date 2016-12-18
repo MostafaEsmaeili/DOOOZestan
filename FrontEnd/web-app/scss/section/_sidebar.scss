@@ -1,12 +1,9 @@
 .sidebarView {
-  width            : 100vw;
-  height           : 100vh;
-  background-color : transparentize(black, 0.5);
-  position         : fixed;
-  z-index          : $zIndex-sidebar;
+  position   : fixed;
+  z-index    : $zIndex-sidebar;
   @include translate(0, -60px);
   @include opacity(0);
-  visibility       : hidden;
+  visibility : hidden;
   @include transition(opacity 0.5s);
   &.visible {
     visibility : visible;
@@ -14,6 +11,13 @@
     .settings {
       @include translate(0, 0);
     }
+  }
+  .holder {
+    width            : 100vw;
+    height           : 100vh;
+    background-color : transparentize(black, 0.5);
+    position         : fixed;
+    z-index          : $zIndex-sidebar - 1;
   }
 
   //********************************************************************************************************************
@@ -31,54 +35,63 @@
     //******************************************************************************************************************
 
     .userInfo {
-      color          : white;
-      border-bottom  : 1px solid transparentize(white, 0.5);
-      padding-bottom : 20px;
+      border-bottom  : 1px solid transparentize(white, 0.75);
       padding-top    : 10px;
+      padding-bottom : 20px;
       margin-bottom  : 10px;
 
       //****************************************************************************************************************
 
-      .inputFile {
-        width    : 0.1px;
-        height   : 0.1px;
-        opacity  : 0;
-        overflow : hidden;
-        position : absolute;
-        z-index  : -1;
-      }
-      .inputFile + label {
-        display : block;
-        margin  : 10px auto;
-        cursor  : pointer;
-        &.isNotLoginLabel {
-          display : inline-block;
+      //.inputFile {
+      //  width    : 0.1px;
+      //  height   : 0.1px;
+      //  opacity  : 0;
+      //  overflow : hidden;
+      //  position : absolute;
+      //  z-index  : -1;
+      //}
+      //.inputFile + label {
+      //  display : block;
+      //  margin  : 10px auto;
+      //  cursor  : pointer;
+      //  &.isNotLoginLabel {
+      //    display : inline-block;
+      //  }
+      //}
+
+      //****************************************************************************************************************
+
+      .user {
+        display         : block;
+        color           : white;
+        text-decoration : none;
+        .userImage {
+          width         : 50px;
+          height        : 50px;
+          margin-bottom : 10px;
+          @include border-radius(50%);
+          @include box-shadow(0 0 5px white);
+        }
+        .name {
+          font-weight : bold;
+        }
+        .phone {
+          font-size : 10px;
         }
       }
 
       //****************************************************************************************************************
 
-      .avatar {
-        width         : 50px;
-        height        : 50px;
-        @include border-radius(50%);
-        @include box-shadow(0 0 5px white);
-        margin-bottom : 10px;
-      }
-      .name {
-        font-weight : bold;
-      }
-      .phone {
-        font-size : 10px;
-      }
       .login, .register {
         color           : white;
         text-decoration : none;
         padding         : 10px;
-        @include transition(color 0.5s);
-        &:hover {
-          color : green;
-        }
+      }
+      .register {
+        margin-left : 10px;
+      }
+      .new-user {
+        font-size : 40px;
       }
     }
 
