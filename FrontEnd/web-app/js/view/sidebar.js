@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'js-cookie',
-    '../../template/section/sidebar.html',
+    '../../template/section/sidebar.html'
 ], function ($, _, Backbone, JS_Cookie, SidebarSectionTemplate) {
     var body        = $('body'),
         main        = $('main'),
@@ -12,10 +12,10 @@ define([
             className   : 'sidebarView',
             events      : {
                 // 'change .inputFile'                : 'avatarUpload',
-                'click  .logout': 'logout',
+                'click  .logout': 'logout'
             },
             template    : {
-                page: _.template(SidebarSectionTemplate),
+                page: _.template(SidebarSectionTemplate)
             },
             initialize  : function () {
                 this.render();

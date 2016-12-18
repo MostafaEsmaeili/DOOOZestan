@@ -1,9 +1,12 @@
 define([
     'jquery'
 ], function ($) {
-    return (function ($) {
-        $.fn.Vibrate = function () {
-            console.log('qqqqqqqqqqqqqqqqqqqqq');
-        };
-    }($));
+    return function () {
+        // enable vibration support
+        navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+        if (navigator.vibrate) {
+            // vibration API supported
+            navigator.vibrate(3);
+        }
+    }
 });

@@ -2,11 +2,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    '../module/vibrate',
     '../collection/game',
     '../model/game',
     '../../template/page/game.html',
     '../../template/section/game.html'
-], function ($, _, Backbone, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
+], function ($, _, Backbone, Vibrate, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
     var body           = $('body'),
         gameCollection = new GameCollection(),
         gameModel      = new GameModel(),
@@ -51,16 +52,9 @@ define([
                 return this;
             },
             select    : function (e) {
-                this.vibrate();
+                Vibrate();
                 $('.action').removeClass('selected');
                 $(e.target).addClass('selected');
-            },
-            vibrate   : function () {
-                navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-                if (navigator.vibrate) {
-                    // vibration API supported
-                    navigator.vibrate(5);
-                }
             }
         });
     return gameView;

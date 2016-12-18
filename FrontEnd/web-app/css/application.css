@@ -5971,11 +5971,13 @@ button.close {
     padding-bottom: 50px; }
   .loginSection .welcome {
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center; }
     .loginSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
+    .loginSection .welcome .slogan {
+      font-size: 17px; }
   .loginSection .logo {
     width: 100px;
     height: 100px;
@@ -6026,6 +6028,8 @@ button.close {
   .loginSection .register {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
+  .loginSection .forgotPassword {
+    color: rgba(255, 255, 255, 0.5); }
 
 .registerSection {
   width: 100%;
@@ -6044,11 +6048,13 @@ button.close {
     padding-bottom: 50px; }
   .registerSection .welcome {
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center; }
     .registerSection .welcome .dooozestan {
       font-size: 30px;
       font-weight: bold; }
+    .registerSection .welcome .slogan {
+      font-size: 17px; }
   .registerSection .logo {
     width: 100px;
     height: 100px;
@@ -6099,6 +6105,72 @@ button.close {
   .registerSection .login {
     color: rgba(255, 255, 255, 0.5);
     margin-top: 10px; }
+
+.resetPasswordSection {
+  width: 100%;
+  text-align: center; }
+  .resetPasswordSection.largeHeight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .resetPasswordSection.smallHeight {
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px; }
+  .resetPasswordSection .welcome {
+    color: white;
+    font-size: 13px;
+    text-align: center; }
+    .resetPasswordSection .welcome .dooozestan {
+      font-size: 30px;
+      font-weight: bold; }
+    .resetPasswordSection .welcome .slogan {
+      font-size: 17px; }
+  .resetPasswordSection .logo {
+    width: 100px;
+    height: 100px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 5px white;
+    box-shadow: 0 0 5px white; }
+  .resetPasswordSection .email {
+    background-color: #455;
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    color: white;
+    width: 300px; }
+    @media (max-width: 480px) {
+      .resetPasswordSection .email {
+        width: 90%; } }
+  .resetPasswordSection .submit {
+    background-color: white;
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    width: 300px;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s; }
+    @media (max-width: 480px) {
+      .resetPasswordSection .submit {
+        width: 90%; } }
+    .resetPasswordSection .submit:active {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9); }
 
 .playground {
   position: absolute;

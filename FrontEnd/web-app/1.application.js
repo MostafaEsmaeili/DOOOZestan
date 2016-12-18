@@ -1966,45 +1966,51 @@ webpackJsonp([1],[
 	    __webpack_require__(6),
 	    __webpack_require__(9),
 	    __webpack_require__(15),
+	    __webpack_require__(32),
 	    __webpack_require__(18),
 	    __webpack_require__(21),
-	    __webpack_require__(26),
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomeView, LoginView, RegisterView, ProfileView, GameView, NotFoundView) {
+	    __webpack_require__(27)
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomeView, LoginView, RegisterView, ResetPasswordView, ProfileView, GameView, NotFoundView) {
 	    var body      = $('body'),
 	        main      = $('main'),
 	        appRouter = Backbone.Router.extend({
-	            initialize: function (options) {
+	            initialize   : function (options) {
 	            },
-	            routes    : {
+	            routes       : {
 	                // ''           : 'home',
-	                ''           : 'game',
-	                'login'      : 'login',
-	                'register'   : 'register',
-	                'profile/:id': 'profile',
-	                'game/:id'   : 'game',
-	                '*path'      : 'notFound',
+	                ''             : 'game',
+	                'login'        : 'login',
+	                'register'     : 'register',
+	                'resetPassword': 'resetPassword',
+	                'profile/:id'  : 'profile',
+	                'game/:id'     : 'game',
+	                '*path'        : 'notFound'
 	            },
-	            home      : function () {
+	            home         : function () {
 	                var homeView = new HomeView();
 	                main.html(homeView.$el);
 	            },
-	            login     : function () {
+	            login        : function () {
 	                var loginView = new LoginView();
 	                main.html(loginView.$el);
 	            },
-	            register  : function () {
+	            register     : function () {
 	                var registerView = new RegisterView();
 	                main.html(registerView.$el);
 	            },
-	            profile   : function (id) {
+	            resetPassword: function () {
+	                var resetPasswordView = new ResetPasswordView();
+	                main.html(resetPasswordView.$el);
+	            },
+	            profile      : function (id) {
 	                var profileView = new ProfileView();
 	                main.html(profileView.$el);
 	            },
-	            game      : function (id) {
+	            game         : function (id) {
 	                var gameView = new GameView(id);
 	                main.html(gameView.$el);
 	            },
-	            notFound  : function (path) {
+	            notFound     : function (path) {
 	                var notFoundView = new NotFoundView(path);
 	                main.html(notFoundView.$el);
 	            }
@@ -2021,7 +2027,7 @@ webpackJsonp([1],[
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(7),
-	    __webpack_require__(8),
+	    __webpack_require__(8)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, HomePageTemplate, HomeSectionTemplate) {
 	    var body     = $('body'),
 	        homeView = Backbone.View.extend({
@@ -2066,7 +2072,7 @@ webpackJsonp([1],[
 	    __webpack_require__(10),
 	    __webpack_require__(11),
 	    __webpack_require__(13),
-	    __webpack_require__(14),
+	    __webpack_require__(14)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarView, LoginPageTemplate, LoginSectionTemplate) {
 	    var body          = $('body'),
 	        userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
@@ -2076,8 +2082,8 @@ webpackJsonp([1],[
 	            className       : 'loginView',
 	            events          : {
 	                'click .eye'       : 'showHidePassword',
-	                'submit form'      : 'submit',
-	                'change .inputfile': 'avatarUpload'
+	                'submit form'      : 'submit'
+	                // 'change .inputfile': 'avatarUpload'
 	            },
 	            template        : {
 	                page   : _.template(LoginPageTemplate),
@@ -2100,7 +2106,7 @@ webpackJsonp([1],[
 	                return this;
 	            },
 	            updateCSS       : function () {
-	                if (window.innerHeight < 500) {
+	                if (window.innerHeight < 700) {
 	                    $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
 	                else {
@@ -2324,7 +2330,7 @@ webpackJsonp([1],[
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(10),
-	    __webpack_require__(12),
+	    __webpack_require__(12)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarSectionTemplate) {
 	    var body        = $('body'),
 	        main        = $('main'),
@@ -2333,10 +2339,10 @@ webpackJsonp([1],[
 	            className   : 'sidebarView',
 	            events      : {
 	                // 'change .inputFile'                : 'avatarUpload',
-	                'click  .logout': 'logout',
+	                'click  .logout': 'logout'
 	            },
 	            template    : {
-	                page: _.template(SidebarSectionTemplate),
+	                page: _.template(SidebarSectionTemplate)
 	            },
 	            initialize  : function () {
 	                this.render();
@@ -2388,7 +2394,7 @@ webpackJsonp([1],[
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"holder\"></div>\n<section class=\"settings\">\n    <section class=\"userInfo\">\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\" class=\"<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>\">-->\n        <% if(userIsLogin === 'yes'){ %>\n        <a href=\"#profile/1\" class=\"user\">\n            <img src=\"img/new-user.png\" alt=\"\" class=\"userImage\">\n            <div class=\"name\">Ehsan Amiri</div>\n            <div class=\"phone\">+98-9371508772</div>\n        </a>\n        <% }else{ %>\n        <i class=\"fa fa-user-circle-o new-user\"></i>\n        <a href=\"#register\" class=\"register\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Register\n        </a>\n        <a href=\"#login\" class=\"login\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Login\n        </a>\n        <% } %>\n    </section>\n\n    <!-- *********************************************************************************************************** -->\n\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-question\"></i>\n                    DOOOZestan FAQ\n                </a>\n            </li>\n            <% if(userIsLogin === 'yes'){ %>\n            <li class=\"optionsLI\">\n                <a href=\"#game/1\" class=\"optionsLink logout\">\n                    <i class=\"icon fa fa-sign-out\"></i>\n                    Log out\n                </a>\n            </li>\n            <% } %>\n        </ul>\n    </nav>\n</section>"
+	module.exports = "<div class=\"holder\"></div>\n<section class=\"settings\">\n    <section class=\"userInfo\">\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\" class=\"<%- (userIsLogin === 'yes') ? '' : 'isNotLoginLabel' %>\">-->\n        <% if(userIsLogin === 'yes'){ %>\n        <a href=\"#profile/1\" class=\"user\">\n            <img src=\"img/new-user.png\" alt=\"\" class=\"userImage\">\n            <div class=\"name\">Ehsan Amiri</div>\n            <div class=\"phone\">+98-9371508772</div>\n        </a>\n        <% }else{ %>\n        <i class=\"fa fa-user-circle-o new-user\"></i>\n        <a href=\"#register\" class=\"register\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Register\n        </a>\n        <a href=\"#login\" class=\"login\">\n            <i class=\"icon fa fa-sign-in\"></i>\n            Login\n        </a>\n        <% } %>\n    </section>\n\n    <!-- *********************************************************************************************************** -->\n\n    <nav class=\"options\">\n        <ul class=\"optionsUL\">\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-gamepad\"></i>\n                    New Game\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-comments\"></i>\n                    New Chat\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-users\"></i>\n                    Contacts\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-user-plus\"></i>\n                    Invite Friends\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-cog\"></i>\n                    Settings\n                </a>\n            </li>\n            <li class=\"optionsLI\">\n                <a href=\"#\" class=\"optionsLink\">\n                    <i class=\"icon fa fa-coffee\"></i>\n                    About\n                </a>\n            </li>\n            <% if(userIsLogin === 'yes'){ %>\n            <li class=\"optionsLI\">\n                <a href=\"#game/1\" class=\"optionsLink logout\">\n                    <i class=\"icon fa fa-sign-out\"></i>\n                    Log out\n                </a>\n            </li>\n            <% } %>\n        </ul>\n    </nav>\n</section>"
 
 /***/ },
 /* 13 */
@@ -2400,7 +2406,7 @@ webpackJsonp([1],[
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"loginSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username or EMail\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required />-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"loginSection\">\n    <div class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n        <p class=\"slogan\">Play & Know</p>\n    </div>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username or EMail\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required />-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"register\">\n        Not a member?\n        <a href=\"#register\">Register.</a>\n    </p>\n    <p class=\"forgotPassword\">\n        Forgot Password?\n        <a href=\"#resetPassword\">Reset Password.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 15 */
@@ -2413,7 +2419,7 @@ webpackJsonp([1],[
 	    __webpack_require__(10),
 	    __webpack_require__(11),
 	    __webpack_require__(16),
-	    __webpack_require__(17),
+	    __webpack_require__(17)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, JS_Cookie, SidebarView, RegisterPageTemplate, RegisterSectionTemplate) {
 	    var body         = $('body'),
 	        registerView = Backbone.View.extend({
@@ -2421,8 +2427,8 @@ webpackJsonp([1],[
 	            className       : 'registerView',
 	            events          : {
 	                'click .eye'       : 'showHidePassword',
-	                'submit form'      : 'submit',
-	                'change .inputFile': 'avatarUpload',
+	                'submit form'      : 'submit'
+	                // 'change .inputFile': 'avatarUpload'
 	            },
 	            template        : {
 	                page   : _.template(RegisterPageTemplate),
@@ -2442,7 +2448,7 @@ webpackJsonp([1],[
 	                return this;
 	            },
 	            updateCSS       : function () {
-	                if (window.innerHeight < 500) {
+	                if (window.innerHeight < 700) {
 	                    $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
 	                }
 	                else {
@@ -2497,7 +2503,7 @@ webpackJsonp([1],[
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<section class=\"registerSection\">\n    <p class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n    </p>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
+	module.exports = "<section class=\"registerSection\">\n    <div class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n        <p class=\"slogan\">Play & Know</p>\n    </div>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"text\" placeholder=\"Username\" class=\"username\" required>\n        <br>\n        <input type=\"password\" placeholder=\"Password\" class=\"password\" required>\n        <i class=\"eye fa fa-eye\"></i>\n        <br>\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <!--<input type=\"file\" name=\"file\" id=\"file\" class=\"inputFile\" required/>-->\n        <!--<label for=\"file\">Choose Avatar</label>-->\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n    <p class=\"login\">\n        Already a member?\n        <a href=\"#login\">Login.</a>\n    </p>\n</section>"
 
 /***/ },
 /* 18 */
@@ -2508,7 +2514,7 @@ webpackJsonp([1],[
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(19),
-	    __webpack_require__(20),
+	    __webpack_require__(20)
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ProfilePageTemplate, ProfileSectionTemplate) {
 	    var body        = $('body'),
 	        profileView = Backbone.View.extend({
@@ -2553,8 +2559,9 @@ webpackJsonp([1],[
 	    __webpack_require__(22),
 	    __webpack_require__(23),
 	    __webpack_require__(24),
-	    __webpack_require__(25)
-	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
+	    __webpack_require__(25),
+	    __webpack_require__(26)
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, Vibrate, GameCollection, GameModel, GamePageTemplate, GameSectionTemplate) {
 	    var body           = $('body'),
 	        gameCollection = new GameCollection(),
 	        gameModel      = new GameModel(),
@@ -2599,16 +2606,9 @@ webpackJsonp([1],[
 	                return this;
 	            },
 	            select    : function (e) {
-	                this.vibrate();
+	                Vibrate();
 	                $('.action').removeClass('selected');
 	                $(e.target).addClass('selected');
-	            },
-	            vibrate   : function () {
-	                navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-	                if (navigator.vibrate) {
-	                    // vibration API supported
-	                    navigator.vibrate(5);
-	                }
 	            }
 	        });
 	    return gameView;
@@ -2619,10 +2619,27 @@ webpackJsonp([1],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	    __webpack_require__(1)
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($) {
+	    return function () {
+	        // enable vibration support
+	        navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+	        if (navigator.vibrate) {
+	            // vibration API supported
+	            navigator.vibrate(3);
+	        }
+	    }
+	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(23),
+	    __webpack_require__(24),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, GameModel) {
 	    var gameCollection = Backbone.Collection.extend({
 	        // url       : 'http://192.168.1.103/Doozestan.WebApi/API/Game/',
@@ -2635,7 +2652,7 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
@@ -2654,27 +2671,27 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	module.exports = ""
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"playground\">\n    <div class=\"actionHolder\">\n        <div class=\"action\">1</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">2</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">3</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">4</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">5</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">6</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">7</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">8</div>\n    </div>\n    <div class=\"actionHolder\">\n        <div class=\"action\">9</div>\n    </div>\n</section>"
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	    __webpack_require__(1),
 	    __webpack_require__(3),
 	    __webpack_require__(4),
-	    __webpack_require__(27),
 	    __webpack_require__(28),
+	    __webpack_require__(29),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, NotFoundPageTemplate, NotFoundSectionTemplate) {
 	    var body         = $('body'),
 	        notFoundView = Backbone.View.extend({
@@ -2698,12 +2715,6 @@ webpackJsonp([1],[
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-	module.exports = ""
-
-/***/ },
 /* 28 */
 /***/ function(module, exports) {
 
@@ -2711,6 +2722,12 @@ webpackJsonp([1],[
 
 /***/ },
 /* 29 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
@@ -2718,7 +2735,7 @@ webpackJsonp([1],[
 	    __webpack_require__(3),
 	    __webpack_require__(4),
 	    __webpack_require__(11),
-	    __webpack_require__(30),
+	    __webpack_require__(31),
 	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, SidebarView, HeaderSectionTemplate) {
 	    var body        = $('body'),
 	        sidebarView = new SidebarView(),
@@ -2742,16 +2759,80 @@ webpackJsonp([1],[
 	            showSidebar: function () {
 	                $('.sidebarView').addClass('visible');
 	                body.addClass('noScroll');
-	            },
+	            }
 	        });
 	    return headerView;
 	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = "<nav class=\"nav\">\n    <i class=\"hamburgerMenu fa fa-bars\"></i>\n    <a href=\"#game/1\" class=\"logo\">\n        <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"Tic Tac Toe Logo\" title=\"Tic Tac Toe Logo\" class=\"logoImage\">\n    </a>\n</nav>"
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
+	    __webpack_require__(1),
+	    __webpack_require__(3),
+	    __webpack_require__(4),
+	    __webpack_require__(33),
+	    __webpack_require__(34)
+	], __WEBPACK_AMD_DEFINE_RESULT__ = function ($, _, Backbone, ResetPasswordPageTemplate, ResetPasswordSectionTemplate) {
+	    var body              = $('body'),
+	        resetPasswordView = Backbone.View.extend({
+	            tagName   : 'section',
+	            className : 'resetPasswordView',
+	            events    : {
+	                'submit form': 'submit'
+	            },
+	            template  : {
+	                page   : _.template(ResetPasswordPageTemplate),
+	                section: _.template(ResetPasswordSectionTemplate)
+	            },
+	            initialize: function () {
+	                $(window).on("resize", this.updateCSS);
+	                this.render();
+	            },
+	            render    : function () {
+	                var _this = this;
+	                body.removeClass().addClass('resetPassword');
+	                this.$el.html(this.template.page);
+	                $.when(
+	                    this.$el.append(this.template.section)
+	                ).then(function () {
+	                    _this.updateCSS();
+	                });
+	                return this;
+	            },
+	            updateCSS : function () {
+	                if (window.innerHeight < 500) {
+	                    $('.resetPasswordSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
+	                }
+	                else {
+	                    $('.resetPasswordSection', this.$el).removeClass('smallHeight').addClass('largeHeight');
+	                }
+	            },
+	            submit    : function () {
+	                Backbone.history.navigate('game/1', {trigger: true});
+	            }
+	        });
+	    return resetPasswordView;
+	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	module.exports = ""
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	module.exports = "<section class=\"resetPasswordSection\">\n    <div class=\"welcome\">\n        Welcome to\n        <br>\n        <span class=\"dooozestan\">DOOOZestan</span>\n        <p class=\"slogan\">Play & Know</p>\n    </div>\n    <img src=\"img/Tic-Tac-Toe-Game-grey.png\" alt=\"\" class=\"logo\">\n    <form action=\"\">\n        <input type=\"email\" placeholder=\"EMail\" class=\"email\" required>\n        <br>\n        <input type=\"submit\" class=\"submit\"></input>\n    </form>\n</section>"
 
 /***/ }
 ]);

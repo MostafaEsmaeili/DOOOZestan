@@ -5,7 +5,7 @@ define([
     'js-cookie',
     'sidebar',
     '../../template/page/login.html',
-    '../../template/section/login.html',
+    '../../template/section/login.html'
 ], function ($, _, Backbone, JS_Cookie, SidebarView, LoginPageTemplate, LoginSectionTemplate) {
     var body          = $('body'),
         userNameValue = (JS_Cookie.get('userName')) ? JS_Cookie.get('userName') : false,
@@ -15,8 +15,8 @@ define([
             className       : 'loginView',
             events          : {
                 'click .eye'       : 'showHidePassword',
-                'submit form'      : 'submit',
-                'change .inputfile': 'avatarUpload'
+                'submit form'      : 'submit'
+                // 'change .inputfile': 'avatarUpload'
             },
             template        : {
                 page   : _.template(LoginPageTemplate),
@@ -39,7 +39,7 @@ define([
                 return this;
             },
             updateCSS       : function () {
-                if (window.innerHeight < 500) {
+                if (window.innerHeight < 700) {
                     $('.loginSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
                 }
                 else {

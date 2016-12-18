@@ -5,7 +5,7 @@ define([
     'js-cookie',
     'sidebar',
     '../../template/page/register.html',
-    '../../template/section/register.html',
+    '../../template/section/register.html'
 ], function ($, _, Backbone, JS_Cookie, SidebarView, RegisterPageTemplate, RegisterSectionTemplate) {
     var body         = $('body'),
         registerView = Backbone.View.extend({
@@ -13,8 +13,8 @@ define([
             className       : 'registerView',
             events          : {
                 'click .eye'       : 'showHidePassword',
-                'submit form'      : 'submit',
-                'change .inputFile': 'avatarUpload',
+                'submit form'      : 'submit'
+                // 'change .inputFile': 'avatarUpload'
             },
             template        : {
                 page   : _.template(RegisterPageTemplate),
@@ -34,7 +34,7 @@ define([
                 return this;
             },
             updateCSS       : function () {
-                if (window.innerHeight < 500) {
+                if (window.innerHeight < 700) {
                     $('.registerSection', this.$el).removeClass('largeHeight').addClass('smallHeight');
                 }
                 else {
