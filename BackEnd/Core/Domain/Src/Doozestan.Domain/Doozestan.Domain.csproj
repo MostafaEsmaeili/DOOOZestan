@@ -90,6 +90,10 @@
     <Compile Include="Migrations\201612181751443_add some column.Designer.cs">
       <DependentUpon>201612181751443_add some column.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612191927303_AddName.cs" />
+    <Compile Include="Migrations\201612191927303_AddName.Designer.cs">
+      <DependentUpon>201612191927303_AddName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRequest\Login\ServiceLoginRequest.cs" />
@@ -116,12 +120,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612181751443_add some column.resx">
       <DependentUpon>201612181751443_add some column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612191927303_AddName.resx">
+      <DependentUpon>201612191927303_AddName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

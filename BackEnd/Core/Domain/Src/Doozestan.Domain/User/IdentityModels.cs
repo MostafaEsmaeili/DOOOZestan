@@ -17,6 +17,8 @@ namespace Doozestan.Domain
         public virtual bool IsCustomizedAccess { get; set; }
         public virtual DateTime CreateDate { get; set; }
         public virtual int? Status { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual  string LastName { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager )
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
