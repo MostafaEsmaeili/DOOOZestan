@@ -22,8 +22,8 @@ namespace Doozestan.Domain
             Property(x => x.EndDate).HasColumnName(@"EndDate").IsOptional().HasColumnType("datetime");
             Property(x => x.Status).HasColumnName(@"Status").IsOptional().HasColumnType("int");
             Property(x => x.WinnerId).HasColumnName(@"WinnerId").IsOptional().HasColumnType("nvarchar").HasMaxLength(128);
+            HasOptional(a => a.ApplicationUser).WithMany(b => b.Games).HasForeignKey(c => c.WinnerId).WillCascadeOnDelete(false);
 
-        //    HasOptional(a => a.AspNetUser).WithMany(b => b.Games).HasForeignKey(c => c.WinnerId).WillCascadeOnDelete(false);
         }
     }
 

@@ -1,4 +1,6 @@
 
+using Newtonsoft.Json;
+
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 namespace Doozestan.Domain
@@ -13,13 +15,13 @@ namespace Doozestan.Domain
         public int? Status { get; set; }
         public string WinnerId { get; set; }
 
-      //  public virtual System.Collections.Generic.ICollection<Tournament> Tournaments { get; set; }
-
-     //   public virtual AspNetUser AspNetUser { get; set; }
-
+        [JsonIgnore]
+        public virtual System.Collections.Generic.ICollection<Tournament> Tournaments { get; set; }
+        [JsonIgnore]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public Game()
         {
-           // Tournaments = new System.Collections.Generic.List<Tournament>();
+            Tournaments = new System.Collections.Generic.List<Tournament>();
         }
     }
 

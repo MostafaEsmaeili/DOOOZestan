@@ -70,7 +70,7 @@ namespace Doozestan.UserManagement
 
             //userManager.EmailService = service;
             UserManager = userManager;
-            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new CustomIdentityDbContext()));
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new DoozestanDbContext()));
         }
 
         public RoleManager<IdentityRole> RoleManager { get; private set; }

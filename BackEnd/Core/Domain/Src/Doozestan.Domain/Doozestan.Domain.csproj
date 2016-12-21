@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\..\..\..\TPLib\Microsoft\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\TPLib\Utility\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -67,16 +70,44 @@
     <Compile Include="Entity\AspNetUserClaim.cs" />
     <Compile Include="Entity\AspNetUserLogin.cs" />
     <Compile Include="Entity\AspNetUserRole.cs" />
+    <Compile Include="Entity\Client.cs" />
+    <Compile Include="Entity\ClientClaim.cs" />
+    <Compile Include="Entity\ClientCorsOrigin.cs" />
+    <Compile Include="Entity\ClientCustomGrantType.cs" />
+    <Compile Include="Entity\ClientIdPRestriction.cs" />
+    <Compile Include="Entity\ClientMap.cs" />
+    <Compile Include="Entity\ClientPostLogoutRedirectUri.cs" />
+    <Compile Include="Entity\ClientRedirectUri.cs" />
+    <Compile Include="Entity\ClientScope.cs" />
+    <Compile Include="Entity\ClientSecret.cs" />
+    <Compile Include="Entity\Consent.cs" />
     <Compile Include="Entity\DoozestanDbContext.cs" />
     <Compile Include="Entity\Game.cs" />
+    <Compile Include="Entity\GetAllGameReturnModel.cs" />
     <Compile Include="Entity\IDoozestanDbContext.cs" />
-    <Compile Include="Entity\Map\AspNetRoleMap.cs" />
-    <Compile Include="Entity\Map\AspNetUserClaimMap.cs" />
-    <Compile Include="Entity\Map\AspNetUserLoginMap.cs" />
-    <Compile Include="Entity\Map\AspNetUserMap.cs" />
-    <Compile Include="Entity\Map\AspNetUserRoleMap.cs" />
+    <Compile Include="Entity\Log.cs" />
+    <Compile Include="Entity\Map\ClientClaimMap.cs" />
+    <Compile Include="Entity\Map\ClientCorsOriginMap.cs" />
+    <Compile Include="Entity\Map\ClientCustomGrantTypeMap.cs" />
+    <Compile Include="Entity\Map\ClientIdPRestrictionMap.cs" />
+    <Compile Include="Entity\Map\ClientPostLogoutRedirectUriMap.cs" />
+    <Compile Include="Entity\Map\ClientRedirectUriMap.cs" />
+    <Compile Include="Entity\Map\ClientScopeMap.cs" />
+    <Compile Include="Entity\Map\ClientSecretMap.cs" />
+    <Compile Include="Entity\Map\ConsentMap.cs" />
     <Compile Include="Entity\Map\GameMap.cs" />
+    <Compile Include="Entity\Map\GetGameByUserIdReturnModel.cs" />
+    <Compile Include="Entity\Map\GetGamesByIdReturnModel.cs" />
+    <Compile Include="Entity\Map\LogMap.cs" />
+    <Compile Include="Entity\Map\ScopeClaimMap.cs" />
+    <Compile Include="Entity\Map\ScopeMap.cs" />
+    <Compile Include="Entity\Map\ScopeSecretMap.cs" />
+    <Compile Include="Entity\Map\TokenMap.cs" />
     <Compile Include="Entity\Map\TournamentMap.cs" />
+    <Compile Include="Entity\Scope.cs" />
+    <Compile Include="Entity\ScopeClaim.cs" />
+    <Compile Include="Entity\ScopeSecret.cs" />
+    <Compile Include="Entity\Token.cs" />
     <Compile Include="Entity\Tournament.cs" />
     <Compile Include="Enum\GameStatus.cs" />
     <Compile Include="Enum\InterestPeriodType.cs" />
@@ -86,13 +117,21 @@
     <Compile Include="Enum\ResponseStatus.cs" />
     <Compile Include="Enum\Sex.cs" />
     <Compile Include="GlobalEnum.cs" />
-    <Compile Include="Migrations\201612181751443_add some column.cs" />
-    <Compile Include="Migrations\201612181751443_add some column.Designer.cs">
-      <DependentUpon>201612181751443_add some column.cs</DependentUpon>
+    <Compile Include="Migrations\201612212028164_integrated.cs" />
+    <Compile Include="Migrations\201612212028164_integrated.Designer.cs">
+      <DependentUpon>201612212028164_integrated.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612191927303_AddName.cs" />
-    <Compile Include="Migrations\201612191927303_AddName.Designer.cs">
-      <DependentUpon>201612191927303_AddName.cs</DependentUpon>
+    <Compile Include="Migrations\201612212104444_changeuser.cs" />
+    <Compile Include="Migrations\201612212104444_changeuser.Designer.cs">
+      <DependentUpon>201612212104444_changeuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612212115419_addtest.cs" />
+    <Compile Include="Migrations\201612212115419_addtest.Designer.cs">
+      <DependentUpon>201612212115419_addtest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612212116569_removeTest.cs" />
+    <Compile Include="Migrations\201612212116569_removeTest.Designer.cs">
+      <DependentUpon>201612212116569_removeTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,11 +163,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612181751443_add some column.resx">
-      <DependentUpon>201612181751443_add some column.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612212028164_integrated.resx">
+      <DependentUpon>201612212028164_integrated.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612191927303_AddName.resx">
-      <DependentUpon>201612191927303_AddName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612212104444_changeuser.resx">
+      <DependentUpon>201612212104444_changeuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612212115419_addtest.resx">
+      <DependentUpon>201612212115419_addtest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612212116569_removeTest.resx">
+      <DependentUpon>201612212116569_removeTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

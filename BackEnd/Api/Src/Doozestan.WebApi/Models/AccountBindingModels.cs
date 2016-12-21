@@ -65,7 +65,7 @@ namespace Doozestan.WebApi.Models
         [DisplayName("ایمیل")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "ایمیل به درستی وارد نشده است.")]
-        [Remote("CheckEmail", "Account", HttpMethod = "POST", ErrorMessage = " ایمیل مورد نظر قبلا انتخاب شده است.لطفا مجدد سعی نمایید")]
+        [Remote("CheckEmail", "Common", HttpMethod = "POST", ErrorMessage = " ایمیل مورد نظر قبلا انتخاب شده است.لطفا مجدد سعی نمایید")]
 
         public string Email { get; set; }
         [Display(Name = "شماره تلفن")]
@@ -77,7 +77,7 @@ namespace Doozestan.WebApi.Models
         [DisplayName("نام کاربری")]
 
         [Required(ErrorMessage = "لطفا نام کاربری را وارد نمایید")]
-        [Remote("CheckIfUserNameExist", "Account", HttpMethod = "POST", ErrorMessage = "نام کاربری موجود است  لطفا نام کاربری دیگری انتخاب نمایید ")]
+        [Remote("CheckIfUserNameExist", "Common", HttpMethod = "POST", ErrorMessage = "نام کاربری موجود است  لطفا نام کاربری دیگری انتخاب نمایید ")]
         public string UserName { get; set; }
 
         [Bindable(false)]
@@ -85,7 +85,7 @@ namespace Doozestan.WebApi.Models
         [DataType(DataType.Password)]
         [DisplayName("رمز عبور")]
         [MinLength(5, ErrorMessage = "رمز عبور باید حداقل شامل هفت کاراکتر باشد")]
-        [Remote("CheckPasswordValidation", "Account", HttpMethod = "POST", ErrorMessage = "کلمه عبور باید حداقل شامل هفت کاراکتر ، اعداد حروف بزرگ و کوچک و همچنین کاراکترهای غیر متنی باشد")]
+        [Remote("CheckPasswordValidation", "Common", HttpMethod = "POST", ErrorMessage = "کلمه عبور باید حداقل شامل هفت کاراکتر ، اعداد حروف بزرگ و کوچک و همچنین کاراکترهای غیر متنی باشد")]
         public string Password { get; set; }
         [DataType(DataType.Password)]
         [DisplayName("تایید رمز عبور")]
