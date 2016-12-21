@@ -1,4 +1,6 @@
 
+using Newtonsoft.Json;
+
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
 namespace Doozestan.Domain
@@ -12,6 +14,7 @@ namespace Doozestan.Domain
         public string ClaimValue { get; set; }
         public string IdentityUserId { get; set; }
 
+        [JsonIgnore]
         public virtual AspNetUser AspNetUser { get; set; }
     }
 

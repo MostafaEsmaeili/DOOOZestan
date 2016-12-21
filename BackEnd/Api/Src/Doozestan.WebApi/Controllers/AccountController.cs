@@ -235,7 +235,7 @@ namespace Doozestan.WebApi.Controllers
         [System.Web.Http.AllowAnonymous]
         [System.Web.Http.Route("Register")]
       
-        public IHttpActionResult Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -259,15 +259,22 @@ namespace Doozestan.WebApi.Controllers
 
             res.LockoutEnabled = false;
 
-            AuthenticationManager.AuthenticationProvider.UserManager.Create(res, model.Password);
-            _userManager.Create(res, model.Password);
-            var addedUser = AuthenticationManager.AuthenticationProvider.UserManager.FindByName(model.UserName);
+            //AuthenticationManager.AuthenticationProvider.UserManager.Create(res, model.Password);
+            //UserManager.Create(res, model.Password);
+            var adduser =await AuthenticationManager.AuthenticationProvider.UserManager.CreateAsync(res, model.Password);
+           if (!adduser.Succeeded)
+           {
+               return GetErrorResult(adduser);
+            }
+
+            // new DoozestanDbContext().SaveChanges();
+           // var addedUser =await AuthenticationManager.AuthenticationProvider.UserManager.FindByNameAsync(model.UserName);
 
             //if (model. != null)
             //    AuthenticationManager.AuthenticationProvider.UserManager.AddToRoles(addedUser.Id,
             //        model.RolesCodeList.ToArray());
-            addedUser.LockoutEnabled = false;
-            AuthenticationManager.AuthenticationProvider.UserManager.Update(addedUser);
+          //  addedUser.LockoutEnabled = false;
+          //  await AuthenticationManager.AuthenticationProvider.UserManager.UpdateAsync(addedUser);
 
             //IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -394,35 +401,6 @@ namespace Doozestan.WebApi.Controllers
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
-        }
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("CheckEmail")]
-
-        public JsonResult<bool> CheckEmail(string email)
-        {
-
-            var user = AuthenticationManager.AuthenticationProvider.UserManager.FindByEmail(email);
-
-
-            return Json(user == null);
-
-        }
-
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("CheckIfUserNameExist")]
-
-        public JsonResult<bool> CheckIfUserNameExist(string UserName)
-        {
-
-            var user = AuthenticationManager.AuthenticationProvider.UserManager.FindByName(UserName);
-            return Json(user == null);
-        }
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("CheckPasswordValidation")]
-
-        public JsonResult<bool> CheckPasswordValidation(string Password, string CurrentPassword)
-        {
-            return Json(AuthenticationManager.AuthenticationProvider.UserManager.PasswordValidator.ValidateAsync(Password).Result.Succeeded);
         }
 
         #endregion

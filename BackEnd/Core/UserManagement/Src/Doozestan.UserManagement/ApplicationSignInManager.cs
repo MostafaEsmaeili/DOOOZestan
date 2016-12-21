@@ -64,7 +64,7 @@ namespace Doozestan.UserManagement
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             //var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<CustomIdentityDbContext>()));
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new CustomIdentityDbContext()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(new DoozestanDbContext()));
 
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
@@ -76,11 +76,11 @@ namespace Doozestan.UserManagement
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 7,
-                RequireNonLetterOrDigit = true,
+                RequiredLength = 5,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
-                RequireUppercase = true,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults

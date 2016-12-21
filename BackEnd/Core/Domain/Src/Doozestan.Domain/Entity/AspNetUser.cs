@@ -1,5 +1,5 @@
 
-using System;
+using Newtonsoft.Json;
 
 #pragma warning disable 1591    //  Ignore "Missing XML Comment" warning
 
@@ -21,26 +21,26 @@ namespace Doozestan.Domain
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
         public string DisplayName { get; set; }
+        public bool? IsAdmin { get; set; }
+        public bool? IsCustomizedAccess { get; set; }
         public System.DateTime? CreateDate { get; set; }
+        public int? Status { get; set; }
         public string Discriminator { get; set; }
-        public bool? IsActive { get; set; }
-        public  bool IsAdmin { get; set; }
-        public  bool IsCustomizedAccess { get; set; }
-        public  int? Status { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
+        [JsonIgnore]
         public virtual System.Collections.Generic.ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
+        [JsonIgnore]
         public virtual System.Collections.Generic.ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        [JsonIgnore]
         public virtual System.Collections.Generic.ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
-     //   public virtual System.Collections.Generic.ICollection<Game> Games { get; set; }
-      //  public virtual System.Collections.Generic.ICollection<Tournament> Tournaments { get; set; }
 
         public AspNetUser()
         {
             AspNetUserClaims = new System.Collections.Generic.List<AspNetUserClaim>();
             AspNetUserLogins = new System.Collections.Generic.List<AspNetUserLogin>();
             AspNetUserRoles = new System.Collections.Generic.List<AspNetUserRole>();
-        //    Games = new System.Collections.Generic.List<Game>();
-            //Tournaments = new System.Collections.Generic.List<Tournament>();
         }
     }
 

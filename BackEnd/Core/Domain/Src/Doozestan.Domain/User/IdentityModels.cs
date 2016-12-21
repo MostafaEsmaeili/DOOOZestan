@@ -34,6 +34,16 @@ namespace Doozestan.Domain
             return userIdentity;
         }
 
+        public virtual System.Collections.Generic.ICollection<Game> Games { get; set; }
+
+        public virtual System.Collections.Generic.ICollection<Tournament> Tournaments { get; set; }
+
+        public ApplicationUser()
+        {
+            Games = new System.Collections.Generic.List<Game>();
+            Tournaments = new System.Collections.Generic.List<Tournament>();
+        }
+
     }
 
 
@@ -42,42 +52,42 @@ namespace Doozestan.Domain
 
     }
 
-    public class CustomIdentityDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public CustomIdentityDbContext()
-            : base("Name=DoozestanDataContext", false)
-        {
+    //public partial class CustomIdentityDbContext : IdentityDbContext<ApplicationUser>
+    //{
+    //    public CustomIdentityDbContext()
+    //        : base("Name=DoozestanDataContext", false)
+    //    {
 
-            Database.SetInitializer<IdentityDbContext>(null);
-            Database.SetInitializer<DoozestanDbContext>(null);
-        }
+    //        Database.SetInitializer<IdentityDbContext>(null);
+    //        Database.SetInitializer<DoozestanDbContext>(null);
+    //    }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            base.OnModelCreating(modelBuilder);
+    //    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    //    {
+    //        modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+    //        base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityUser>()
-                   .ToTable("dbo.AspNetUsers");
-            modelBuilder.Entity<ApplicationUser>()
-                  .ToTable("dbo.AspNetUsers");
+    //        modelBuilder.Entity<IdentityUser>()
+    //               .ToTable("dbo.AspNetUsers");
+    //        modelBuilder.Entity<ApplicationUser>()
+    //              .ToTable("dbo.AspNetUsers");
 
-            modelBuilder.Entity<IdentityRole>()
-                 .ToTable("dbo.AspNetRoles");
-            modelBuilder.Entity<ApplicationRole>()
-                 .ToTable("dbo.AspNetRoles");
+    //        modelBuilder.Entity<IdentityRole>()
+    //             .ToTable("dbo.AspNetRoles");
+    //        modelBuilder.Entity<ApplicationRole>()
+    //             .ToTable("dbo.AspNetRoles");
 
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("dbo.AspNetUserClaims");
+    //        modelBuilder.Entity<IdentityUserClaim>().ToTable("dbo.AspNetUserClaims");
 
-            modelBuilder.Entity<IdentityUserRole>().ToTable("dbo.AspNetUserRoles");
-            modelBuilder.Entity<IdentityUserRole>().HasKey((IdentityUserRole r) => new { UserId = r.UserId, RoleId = r.RoleId }).ToTable("dbo.AspNetUserRoles");
+    //        modelBuilder.Entity<IdentityUserRole>().ToTable("dbo.AspNetUserRoles");
+    //        modelBuilder.Entity<IdentityUserRole>().HasKey((IdentityUserRole r) => new { UserId = r.UserId, RoleId = r.RoleId }).ToTable("dbo.AspNetUserRoles");
 
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("dbo.AspNetUserLogins");
+    //        modelBuilder.Entity<IdentityUserLogin>().ToTable("dbo.AspNetUserLogins");
 
-        }
+    //    }
 
 
-    }
+    //}
     public class BaseServiceResponse
     {
         public ResponseStatus ResponseStatus { get; set; }

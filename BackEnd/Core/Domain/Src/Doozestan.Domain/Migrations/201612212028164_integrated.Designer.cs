@@ -7,13 +7,13 @@ namespace Doozestan.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addsomecolumn : IMigrationMetadata
+    public sealed partial class integrated : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addsomecolumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(integrated));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612181751443_add some column"; }
+            get { return "201612212028164_integrated"; }
         }
         
         string IMigrationMetadata.Source

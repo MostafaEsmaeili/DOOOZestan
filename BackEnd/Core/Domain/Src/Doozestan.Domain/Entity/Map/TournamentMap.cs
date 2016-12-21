@@ -20,8 +20,9 @@ namespace Doozestan.Domain
             Property(x => x.GameId).HasColumnName(@"GameId").IsRequired().HasColumnType("int");
             Property(x => x.UserId).HasColumnName(@"UserId").IsRequired().HasColumnType("nvarchar").HasMaxLength(128);
 
-            //HasRequired(a => a.AspNetUser).WithMany(b => b.Tournaments).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false);
-            //HasRequired(a => a.Game).WithMany(b => b.Tournaments).HasForeignKey(c => c.GameId).WillCascadeOnDelete(false);
+            HasRequired(a => a.Game).WithMany(b => b.Tournaments).HasForeignKey(c => c.GameId).WillCascadeOnDelete(false);
+            HasRequired(a => a.ApplicationUser).WithMany(b => b.Tournaments).HasForeignKey(c => c.UserId).WillCascadeOnDelete(false);
+
         }
     }
 
